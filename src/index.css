@@ -1,0 +1,154 @@
+@import "tailwindcss";
+
+@theme {
+  --font-outfit: "Outfit", sans-serif;
+  --font-inter: "Inter", sans-serif;
+  
+  --color-minimal-black: #0f0f11;
+  --color-minimal-gray: #52525b;
+  --color-minimal-light: #f8f8f9;
+  --color-minimal-border: #e4e4e7;
+}
+
+@layer base {
+  html, body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    background-color: #ffffff;
+    color: #0f0f11;
+    scroll-behavior: smooth;
+    font-family: 'Inter', sans-serif;
+  }
+
+  /* Clean light mode scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #ffffff;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #d4d4d8;
+    border-radius: 4px;
+    border: 2px solid #ffffff;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #0f0f11;
+  }
+}
+
+@utility perspective-1000 {
+  perspective: 1000px;
+}
+
+@utility perspective-2000 {
+  perspective: 2000px;
+}
+
+@utility preserve-3d {
+  transform-style: preserve-3d;
+}
+
+@utility backface-hidden {
+  backface-visibility: hidden;
+}
+
+@utility translate-z-0 {
+  transform: translateZ(0);
+}
+
+@utility translate-z-10 {
+  transform: translateZ(10px);
+}
+
+@utility translate-z-20 {
+  transform: translateZ(20px);
+}
+
+@utility translate-z-30 {
+  transform: translateZ(30px);
+}
+
+@utility translate-z-50 {
+  transform: translateZ(50px);
+}
+
+@utility translate-z-100 {
+  transform: translateZ(100px);
+}
+
+@utility font-outfit {
+  font-family: 'Outfit', sans-serif;
+}
+
+@utility font-inter {
+  font-family: 'Inter', sans-serif;
+}
+
+/* Float animation */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@utility animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 0.05;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.12;
+    transform: scale(1.05);
+  }
+}
+
+@utility animate-pulse-slow {
+  animation: pulse-slow 8s ease-in-out infinite;
+}
+
+/* 3D text styling classes for light mode section titles */
+.text-3d-title {
+  text-shadow: 
+    0 1px 0 #e4e4e7,
+    0 2px 0 #d4d4d8,
+    0 3px 0 #a1a1aa,
+    0 4px 0 #71717a,
+    0 5px 0 #52525b,
+    0 6px 1px rgba(0,0,0,.15),
+    0 0 10px rgba(0,0,0,.1),
+    0 1px 5px rgba(0,0,0,.1),
+    0 3px 10px rgba(0,0,0,.08);
+}
+
+/* 3D text shadow for white text on dark backgrounds (Hero) */
+.text-3d-hero {
+  text-shadow: 
+    0 1px 0 #2a2a2d,
+    0 2px 0 #232326,
+    0 3px 0 #1c1c1f,
+    0 4px 0 #151518,
+    0 5px 0 #0e0e11,
+    0 6px 1px rgba(0,0,0,.4),
+    0 0 10px rgba(0,0,0,.4),
+    0 1px 5px rgba(0,0,0,.5),
+    0 3px 10px rgba(0,0,0,.3);
+}
+
+.text-glow-minimal {
+  text-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Grid pattern background utility */
+.bg-grid-pattern {
+  background-size: 40px 40px;
+  background-image: radial-gradient(circle, #e4e4e7 1px, transparent 1px);
+}
