@@ -152,3 +152,33 @@
   background-size: 40px 40px;
   background-image: radial-gradient(circle, #e4e4e7 1px, transparent 1px);
 }
+
+/* Metallic Gold Text Gradient */
+.text-gold-gradient {
+  background: linear-gradient(135deg, #fff7ed 0%, #fef08a 35%, #eab308 65%, #fef3c7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Gold Glow Effects */
+.shadow-gold-glow {
+  box-shadow: 0 0 30px -5px rgba(234, 179, 8, 0.3);
+}
+
+.drop-shadow-gold {
+  filter: drop-shadow(0 4px 16px rgba(234, 179, 8, 0.4));
+}
+
+@keyframes bounce-slow {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(6px);
+  }
+}
+
+.animate-bounce-slow {
+  animation: bounce-slow 2s infinite ease-in-out;
+}
+

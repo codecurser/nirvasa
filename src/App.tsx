@@ -557,15 +557,15 @@ export default function App() {
         </div>
       </div>
 
-      {/* Hero Section - Full-bleed video background */}
+      {/* Hero Section - Full-bleed video background with luxury overlays */}
       <section 
         id="hero"
         onMouseMove={handleHeroMouseMove}
         onMouseLeave={handleHeroMouseLeave}
         style={{ opacity: heroOpacity, transform: `scale(${heroScale})` }}
-        className="relative w-full h-[80vh] flex flex-col justify-center items-center text-center px-6 z-10 preserve-3d"
+        className="relative w-full min-h-screen flex flex-col justify-between items-center text-center px-6 pt-28 pb-12 z-10 preserve-3d overflow-hidden"
       >
-        {/* Full-bleed video loop with direct src attribute and DOM ref play enforcement */}
+        {/* Full-bleed video background with gradient vignette overlay */}
         <div className="absolute inset-0 w-full h-full overflow-hidden z-0">
           <video
             src="/genrate_an_video_for_the_hero.mp4"
@@ -580,39 +580,63 @@ export default function App() {
                 el.play().catch((err) => console.log('Autoplay blocked:', err)); 
               } 
             }}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover scale-105 filter brightness-90 contrast-105"
           />
-          {/* Subtle overlay shading for readability */}
-          <div className="absolute inset-0 bg-black/35 z-10" />
+          {/* Dual-layer rich vignette & contrast overlay */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/30 to-black/90 z-10" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-transparent via-black/30 to-black/80 z-10" />
         </div>
 
-        {/* Hero details */}
-        <div className="relative z-20 max-w-5xl mx-auto flex flex-col items-center pt-12 preserve-3d">
+        {/* Hero Central Content */}
+        <div className="relative z-20 max-w-5xl mx-auto flex flex-col items-center my-auto pt-6 preserve-3d">
           
-          {/* Subtitle Tag */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 border border-white/20 bg-black/40 backdrop-blur-md mb-6 sm:mb-8 animate-float">
-            <Crown className="w-3.5 h-3.5 text-amber-400" />
-            <span className="text-[9px] sm:text-[10px] font-bold tracking-[0.25em] text-white uppercase">
-              CREATORS OF IMMERSIVE EVENT ARCHITECTURE
-            </span>
-          </div>
-
-          {/* 3D Dynamic Title (White on dark video backdrop) */}
-          <h1 
+          {/* Featured Official Brand Logo Graphic */}
+          <div 
             style={{
               transform: `perspective(1000px) rotateY(${heroRotate.x}deg) rotateX(${heroRotate.y}deg) translateZ(40px)`,
               transition: 'transform 0.15s ease-out'
             }}
-            className="font-outfit text-white text-6xl sm:text-8xl md:text-9xl font-black tracking-[0.05em] uppercase text-3d-hero cursor-default select-none mb-6"
+            className="mb-8 transition-all duration-300 hover:scale-105"
           >
-            NAVRASSAA
-          </h1>
+            <img 
+              src={logoImg} 
+              alt="Navrassaa Events Logo" 
+              className="h-32 sm:h-44 md:h-56 lg:h-64 w-auto object-contain filter drop-shadow-[0_0_35px_rgba(255,255,255,0.55)]"
+            />
+          </div>
 
-          {/* Tagline */}
-          <p className="font-inter text-white/90 text-xs sm:text-sm md:text-base max-w-xl uppercase tracking-[0.4em] font-semibold text-center mb-10 translate-z-10">
-            Turning Events into Experiences
+          {/* Subtitle Tagline */}
+          <p className="font-inter text-neutral-200 text-xs sm:text-sm md:text-base max-w-2xl uppercase tracking-[0.35em] font-semibold text-center mb-10 translate-z-10 drop-shadow-md">
+            Turning Bespoke Gatherings into Extraordinary Legacy
           </p>
 
+          {/* Action CTAs */}
+          <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 z-30 translate-z-20">
+            <a
+              href="#book"
+              className="inline-flex items-center gap-3 bg-gradient-to-r from-amber-500 via-amber-600 to-amber-700 hover:from-amber-400 hover:to-amber-600 text-black font-outfit text-xs font-black tracking-[0.2em] uppercase px-8 py-4 rounded-none shadow-gold-glow hover:scale-105 transition-all duration-300"
+            >
+              BOOK CONSULTATION
+              <ArrowRight className="w-4 h-4 text-black" />
+            </a>
+
+            <a
+              href="#services"
+              className="inline-flex items-center gap-2 border border-white/40 hover:border-white bg-black/40 hover:bg-white/10 backdrop-blur-md text-white font-outfit text-xs font-bold tracking-[0.2em] uppercase px-8 py-4 rounded-none transition-all duration-300"
+            >
+              EXPLORE SERVICES
+              <Sparkles className="w-4 h-4 text-amber-300" />
+            </a>
+          </div>
+
+        </div>
+
+        {/* Hero Bottom - Minimal Scroll Indicator */}
+        <div className="relative z-20 w-full max-w-6xl mx-auto flex items-center justify-center pt-6 border-t border-white/15">
+          <a href="#about" className="inline-flex items-center gap-2 text-[10px] font-bold tracking-widest text-white/70 hover:text-white uppercase transition-colors animate-bounce-slow">
+            <span>SCROLL TO DISCOVER</span>
+            <ArrowRight className="w-3 h-3 rotate-90" />
+          </a>
         </div>
 
       </section>
