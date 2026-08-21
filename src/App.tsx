@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion, MotionValue, useScroll, useTransform } from 'framer-motion'
 import Lenis from 'lenis'
+import logoImg from './assets/logo_transparent.png'
 import { 
   ArrowRight, 
   Award, 
@@ -398,7 +399,7 @@ export default function App() {
     offset: ["start end", "end start"]
   })
 
-  const revealText = "NIRVASSAA EXPERIENCE"
+  const revealText = "NAVRASSAA EXPERIENCE"
   const characters = revealText.split("")
   const centerIndex = Math.floor(characters.length / 2)
 
@@ -452,19 +453,13 @@ export default function App() {
       <header className="absolute top-0 left-0 right-0 z-40 bg-gradient-to-b from-black/50 via-black/25 to-transparent text-white">
         <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-6 flex items-center justify-between">
           
-          {/* Logo with Stylized Circular Red/Gold "N" Emblem */}
-          <a href="#" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-rose-800 to-red-900 border-2 border-amber-400/80 flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform duration-300">
-              <span className="font-outfit text-amber-300 font-black text-lg leading-none mt-[-1px]">N</span>
-            </div>
-            <div className="flex flex-col">
-              <span className="font-outfit text-white font-extrabold uppercase text-lg sm:text-xl tracking-[0.2em] leading-none">
-                NIRVASSAA
-              </span>
-              <span className="text-[8px] tracking-[0.25em] text-amber-400 font-bold uppercase mt-1 leading-none">
-                EVENTS
-              </span>
-            </div>
+          {/* Logo image update */}
+          <a href="#" className="flex items-center gap-3 group py-1">
+            <img 
+              src={logoImg} 
+              alt="Navrassaa Events Logo" 
+              className="h-10 sm:h-12 md:h-14 w-auto object-contain transition-transform duration-300 group-hover:scale-105 filter drop-shadow-[0_2px_10px_rgba(255,255,255,0.4)]"
+            />
           </a>
 
           {/* Desktop Nav - Horizontal listing */}
@@ -511,9 +506,9 @@ export default function App() {
         }`}
       >
         <div className="px-6 py-5 flex items-center justify-between border-b border-neutral-100">
-          <span className="font-outfit text-minimal-black font-extrabold uppercase text-xl tracking-wider">
-            NIRVASSAA <span className="text-neutral-400 text-xs">EVENTS</span>
-          </span>
+          <a href="#" onClick={() => setMenuOpen(false)} className="flex items-center gap-2">
+            <img src={logoImg} alt="Navrassaa Events Logo" className="h-9 w-auto object-contain" />
+          </a>
           <button
             onClick={() => setMenuOpen(false)}
             className="p-2 text-minimal-black hover:text-neutral-500 transition-colors"
@@ -558,7 +553,7 @@ export default function App() {
         </div>
 
         <div className="text-center py-6 text-[10px] tracking-widest text-neutral-400">
-          <span>NIRVASSAA &bull; BESPOKE LUXURY GATHERINGS</span>
+          <span>NAVRASSAA &bull; BESPOKE LUXURY GATHERINGS</span>
         </div>
       </div>
 
@@ -610,7 +605,7 @@ export default function App() {
             }}
             className="font-outfit text-white text-6xl sm:text-8xl md:text-9xl font-black tracking-[0.05em] uppercase text-3d-hero cursor-default select-none mb-6"
           >
-            NIRVASSAA
+            NAVRASSAA
           </h1>
 
           {/* Tagline */}
@@ -660,7 +655,7 @@ export default function App() {
               Restrained visual language. Extraordinary execution.
             </h2>
             <p className="text-neutral-500 leading-relaxed mb-5 text-sm font-inter">
-              Nirvassaa Events functions at the intersection of architecture and event production. By stripping away visual clutter, we highlight structural shapes, pristine caterings, and smooth timeline operations.
+              Navrassaa Events functions at the intersection of architecture and event production. By stripping away visual clutter, we highlight structural shapes, pristine caterings, and smooth timeline operations.
             </p>
             <p className="text-neutral-500 leading-relaxed mb-8 text-sm font-inter">
               Our studio handles location layouts, seating architectures, custom audio coordinate arrays, and timeline logistics. We operate with strict adherence to minimal design standards, delivering experiences that command attention.
@@ -1181,7 +1176,7 @@ export default function App() {
           <div className="relative py-4">
             <MessageSquare className="w-10 h-10 text-neutral-300 mx-auto mb-6" />
             <p className="font-outfit text-xl sm:text-2xl italic leading-relaxed text-minimal-black max-w-3xl mx-auto mb-8">
-              "Nirvassaa Events engineered a wedding union that felt like a museum exhibition. Symmetrical floral grids, clean audio paths, and flawless catering scheduling. Exceptional restraint."
+              "Navrassaa Events engineered a wedding union that felt like a museum exhibition. Symmetrical floral grids, clean audio paths, and flawless catering scheduling. Exceptional restraint."
             </p>
             <div className="flex flex-col items-center">
               <span className="font-outfit font-extrabold text-[11px] tracking-widest uppercase text-minimal-black">
@@ -1227,10 +1222,12 @@ export default function App() {
             
             {/* Logo details */}
             <div className="md:col-span-4 flex flex-col items-start">
-              <span className="font-outfit text-minimal-black font-extrabold uppercase text-xl tracking-[0.25em]">
-                NIRVASSAA
-              </span>
-              <span className="text-[10px] text-neutral-400 tracking-widest uppercase font-bold mt-0.5 mb-6">
+              <img 
+                src={logoImg} 
+                alt="Navrassaa Events Logo" 
+                className="h-14 sm:h-16 w-auto object-contain mb-4"
+              />
+              <span className="text-[10px] text-neutral-400 tracking-widest uppercase font-bold mb-4">
                 BESPOKE EXPERIENCE DESIGN
               </span>
               <p className="text-xs text-neutral-500 leading-relaxed max-w-sm">
@@ -1282,7 +1279,7 @@ export default function App() {
                 <span>24/7 Service</span>
               </div>
               <span className="block text-xs text-neutral-400">
-                concierge@nirvassaaevents.com
+                concierge@navrassaaevents.com
               </span>
               <span className="block text-xs text-neutral-400 mt-0.5">
                 +81 (3) 5422 9901
@@ -1295,7 +1292,7 @@ export default function App() {
           <div className="pt-10 flex flex-col sm:flex-row items-center justify-between gap-6">
             
             <div className="text-[9px] tracking-widest text-neutral-400 uppercase text-center sm:text-left font-bold">
-              <span>&copy; {new Date().getFullYear()} NIRVASSAA. ALL RIGHTS RESERVED. &bull; MINIMALIST PROFESSIONAL GATHERINGS.</span>
+              <span>&copy; {new Date().getFullYear()} NAVRASSAA. ALL RIGHTS RESERVED. &bull; MINIMALIST PROFESSIONAL GATHERINGS.</span>
             </div>
 
             <div className="flex items-center gap-6 text-neutral-400 font-bold">
