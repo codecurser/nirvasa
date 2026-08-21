@@ -14,11 +14,20 @@
   html, body {
     margin: 0;
     padding: 0;
-    overflow-x: hidden;
+    width: 100%;
     background-color: #ffffff;
     color: #0f0f11;
     scroll-behavior: smooth;
     font-family: 'Inter', sans-serif;
+  }
+
+  /* Utility for hiding scrollbars on mobile sliders */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 
   /* Clean light mode scrollbar */

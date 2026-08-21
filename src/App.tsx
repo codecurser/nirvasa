@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { motion, MotionValue, useScroll, useTransform } from 'framer-motion'
+import { motion, MotionValue, useScroll, useTransform, useMotionValueEvent, AnimatePresence } from 'framer-motion'
 import Lenis from 'lenis'
 import logoImg from './assets/logo_transparent.png'
 import { 
@@ -277,6 +277,284 @@ const CharacterV3 = ({
   )
 }
 
+function ServicesSection({ 
+  setSelectedService 
+}: { 
+  setSelectedService: (title: string) => void 
+}) {
+  const containerRef = useRef<HTMLDivElement>(null)
+  const mobileScrollRef = useRef<HTMLDivElement>(null)
+  const [activeServiceIndex, setActiveServiceIndex] = useState(0)
+  const [mobileIndex, setMobileIndex] = useState(0)
+
+  // Framer Motion useScroll pinned on section container from start start to end end
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"],
+  })
+
+  // 6 services = 600% track width. Shifting by 5 slide widths (5/6 = 83.333333%) displays slide 6.
+  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-83.333333%"])
+  const progressBarWidth = useTransform(scrollYProgress, [0, 1], ["0%", "100%"])
+
+  // Sync active counter with scroll progress
+  useMotionValueEvent(scrollYProgress, "change", (latest) => {
+    const index = Math.min(Math.max(Math.round(latest * 5), 0), 5)
+    setActiveServiceIndex(index)
+  })
+
+  // Mobile scroll handler for swipeable carousel indicator
+  const handleMobileScroll = () => {
+    if (!mobileScrollRef.current) return
+    const { scrollLeft, clientWidth } = mobileScrollRef.current
+    if (clientWidth > 0) {
+      const idx = Math.min(Math.max(Math.round(scrollLeft / (clientWidth * 0.8)), 0), 5)
+      setMobileIndex(idx)
+    }
+  }
+
+  return (
+    <section 
+      id="services" 
+      ref={containerRef} 
+      className="relative w-full bg-white z-20 md:h-[600vh]"
+    >
+      {/* DESKTOP & TABLET VIEW (md and up): Pinned Sticky Horizontal Scroll */}
+      <div className="hidden md:flex sticky top-0 w-full h-screen overflow-hidden flex-col justify-between">
+        
+        {/* Header Progress indicator */}
+        <div className="w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 pt-6 md:pt-10 flex justify-between items-end border-b border-neutral-100 pb-4 shrink-0 z-30">
+          <div>
+            <span className="text-xs font-semibold tracking-[0.25em] text-neutral-400 uppercase mb-1.5 block">
+              OUR SERVICES
+            </span>
+            <h2 className="font-outfit text-2xl sm:text-3xl font-extrabold text-minimal-black">
+              Bespoke Experiences. One by One.
+            </h2>
+          </div>
+          <div className="flex items-center gap-3 text-xs font-bold tracking-widest text-neutral-400 uppercase">
+            <span className="hidden sm:inline">SCROLL DOWN TO ADVANCE</span>
+            <span className="hidden sm:inline">&bull;</span>
+            <div className="flex items-center gap-1.5 text-minimal-black bg-neutral-100/90 backdrop-blur-sm px-3.5 py-1.5 border border-neutral-200/80 font-mono text-sm font-bold shadow-xs">
+              <AnimatePresence mode="wait">
+                <motion.span 
+                  key={activeServiceIndex} 
+                  initial={{ opacity: 0, y: -6 }} 
+                  animate={{ opacity: 1, y: 0 }} 
+                  exit={{ opacity: 0, y: 6 }} 
+                  transition={{ duration: 0.15 }}
+                  className="inline-block min-w-[2ch] text-center"
+                >
+                  0{activeServiceIndex + 1}
+                </motion.span>
+              </AnimatePresence>
+              <span className="text-neutral-400 font-normal">/</span>
+              <span className="text-neutral-400 font-normal">06</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Horizontal Slide Container Track */}
+        <div className="flex-1 flex items-center overflow-hidden relative">
+          <motion.div 
+            style={{ x, width: '600%' }}
+            className="flex flex-row flex-nowrap h-[72vh] shrink-0"
+          >
+            {services.map((service, index) => (
+              <div 
+                key={service.title} 
+                className="w-1/6 h-full shrink-0 flex flex-col lg:flex-row items-center px-6 sm:px-10 lg:px-16 max-w-7xl mx-auto gap-8 lg:gap-16"
+              >
+                {/* Left Column: Image base layer + Video hover preview */}
+                <div className="w-full lg:w-1/2 h-[42%] lg:h-[88%] relative overflow-hidden border border-neutral-200 shadow-md group cursor-pointer">
+                  
+                  <img
+                    src={service.imageUrl}
+                    alt={service.title}
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    loading="lazy"
+                  />
+
+                  <video
+                    src={service.videoUrl}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    ref={(el) => { 
+                      if (el) { 
+                        el.muted = true; 
+                        el.play().catch(() => {}); 
+                      } 
+                    }}
+                    className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                  />
+
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent pointer-events-none" />
+                  
+                  <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm border border-neutral-200 px-3 py-1 text-[8px] font-bold tracking-widest uppercase text-minimal-black group-hover:bg-minimal-black group-hover:text-white transition-colors duration-300">
+                    HOVER TO WATCH PREVIEW
+                  </div>
+
+                  <span className="absolute bottom-4 left-6 font-outfit text-5xl lg:text-7xl font-black text-white/20 select-none">
+                    0{index + 1}
+                  </span>
+                </div>
+
+                {/* Right Column: Editorial Content */}
+                <div className="w-full lg:w-1/2 flex flex-col items-start justify-center pr-4">
+                  <span className="text-[10px] font-bold tracking-widest text-neutral-400 uppercase mb-3 flex items-center gap-2">
+                    <Sparkles className="w-4 h-4 text-minimal-black animate-pulse" />
+                    SERVICE FOCUS
+                  </span>
+                  <h3 className="font-outfit text-2xl sm:text-4xl font-extrabold text-minimal-black tracking-tight mb-5 leading-tight">
+                    {service.title}
+                  </h3>
+                  <p className="text-sm text-neutral-500 leading-relaxed mb-6 font-inter">
+                    {service.desc}
+                  </p>
+
+                  <div className="space-y-2 mb-8">
+                    {service.highlights.map((point) => (
+                      <div key={point} className="flex items-center gap-3 text-xs text-neutral-600 font-semibold tracking-wide uppercase">
+                        <div className="w-5 h-5 rounded-full border border-neutral-200 flex items-center justify-center bg-neutral-50">
+                          <Check className="w-3 h-3 text-minimal-black" />
+                        </div>
+                        <span>{point}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <button
+                    onClick={() => {
+                      setSelectedService(service.title)
+                      const portal = document.getElementById('book')
+                      if (portal) {
+                        portal.scrollIntoView({ behavior: 'smooth' })
+                      }
+                    }}
+                    className="inline-flex items-center gap-2 bg-minimal-black text-white font-outfit text-xs font-bold tracking-widest uppercase px-6 py-3.5 hover:bg-neutral-800 transition-colors duration-300 cursor-pointer"
+                  >
+                    CONFIGURE IN PORTAL
+                    <ArrowRight className="w-4 h-4 text-white" />
+                  </button>
+                </div>
+              </div>
+            ))}
+          </motion.div>
+        </div>
+
+        {/* Visual bottom progress bar indicator */}
+        <div className="w-full h-[4px] bg-neutral-100 mt-auto shrink-0 z-30 overflow-hidden">
+          <motion.div 
+            style={{ width: progressBarWidth }}
+            className="h-full bg-minimal-black"
+          />
+        </div>
+      </div>
+
+      {/* MOBILE VIEW (< md): Touch-Friendly Horizontal Swipe Carousel */}
+      <div className="block md:hidden py-12 px-4 w-full overflow-hidden">
+        {/* Mobile Header */}
+        <div className="px-2 mb-6 flex justify-between items-end border-b border-neutral-100 pb-4">
+          <div>
+            <span className="text-xs font-semibold tracking-[0.25em] text-neutral-400 uppercase mb-1 block">
+              OUR SERVICES
+            </span>
+            <h2 className="font-outfit text-xl font-extrabold text-minimal-black">
+              Bespoke Experiences
+            </h2>
+          </div>
+          <div className="flex items-center gap-1 text-minimal-black bg-neutral-100 px-3 py-1 rounded-full font-mono text-xs font-bold">
+            <span>0{mobileIndex + 1}</span>
+            <span className="text-neutral-400">/</span>
+            <span className="text-neutral-400 font-normal">06</span>
+          </div>
+        </div>
+
+        {/* Swipeable Carousel Track */}
+        <div 
+          ref={mobileScrollRef}
+          onScroll={handleMobileScroll}
+          className="flex gap-4 overflow-x-auto snap-x snap-mandatory no-scrollbar pb-4 px-2"
+        >
+          {services.map((service, index) => (
+            <div 
+              key={service.title}
+              className="snap-center shrink-0 w-[88vw] max-w-sm bg-white border border-neutral-200 p-5 flex flex-col justify-between shadow-xs"
+            >
+              <div>
+                <div className="relative h-48 w-full overflow-hidden border border-neutral-200 mb-5 group">
+                  <img 
+                    src={service.imageUrl} 
+                    alt={service.title} 
+                    className="w-full h-full object-cover" 
+                  />
+                  <span className="absolute bottom-2 left-4 font-outfit text-4xl font-black text-white/30">
+                    0{index + 1}
+                  </span>
+                </div>
+
+                <span className="text-[9px] font-bold tracking-widest text-neutral-400 uppercase mb-2 block">
+                  SERVICE FOCUS
+                </span>
+                <h3 className="font-outfit text-lg font-bold text-minimal-black mb-2">
+                  {service.title}
+                </h3>
+                <p className="text-xs text-neutral-500 leading-relaxed mb-4">
+                  {service.desc}
+                </p>
+                <div className="space-y-1.5 mb-6">
+                  {service.highlights.map((point) => (
+                    <div key={point} className="flex items-center gap-2 text-[10px] text-neutral-600 font-semibold uppercase">
+                      <Check className="w-3 h-3 text-minimal-black shrink-0" />
+                      <span>{point}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <button
+                onClick={() => {
+                  setSelectedService(service.title)
+                  const portal = document.getElementById('book')
+                  if (portal) {
+                    portal.scrollIntoView({ behavior: 'smooth' })
+                  }
+                }}
+                className="w-full inline-flex items-center justify-center gap-2 bg-minimal-black text-white font-outfit text-xs font-bold tracking-widest uppercase py-3 cursor-pointer"
+              >
+                CONFIGURE IN PORTAL
+                <ArrowRight className="w-3.5 h-3.5 text-white" />
+              </button>
+            </div>
+          ))}
+        </div>
+
+        {/* Mobile Slide Dot Indicator */}
+        <div className="flex justify-center items-center gap-2 mt-4">
+          {services.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => {
+                if (mobileScrollRef.current) {
+                  const cardWidth = mobileScrollRef.current.clientWidth * 0.85
+                  mobileScrollRef.current.scrollTo({ left: i * cardWidth, behavior: 'smooth' })
+                }
+              }}
+              className={cn(
+                "w-2 h-2 rounded-full transition-all duration-300",
+                mobileIndex === i ? "bg-minimal-black w-6" : "bg-neutral-300"
+              )}
+              aria-label={`Go to service ${i + 1}`}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [scrollY, setScrollY] = useState(0)
@@ -313,49 +591,7 @@ export default function App() {
     return () => lenis.destroy()
   }, [])
 
-  // Bounding rect scroll tracker with requestAnimationFrame LERP damping for horizontal services row
-  const servicesRef = useRef<HTMLDivElement>(null)
-  const [scrollProgress, setScrollProgress] = useState(0)
-  const targetProgressRef = useRef(0)
-  const currentProgressRef = useRef(0)
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!servicesRef.current) return
-      const rect = servicesRef.current.getBoundingClientRect()
-      const viewportHeight = window.innerHeight
-      const totalHeight = rect.height - viewportHeight
-      const scrolled = -rect.top // distance top of the track has scrolled past viewport top
-      
-      let target = 0
-      if (scrolled >= 0 && scrolled <= totalHeight) {
-        target = (scrolled / totalHeight) * 100
-      } else if (scrolled > totalHeight) {
-        target = 100
-      }
-      targetProgressRef.current = target
-    }
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
-
-  // Animation frame loop to smoothly transition scrollProgress
-  useEffect(() => {
-    let rafId: number
-    const tick = () => {
-      const diff = targetProgressRef.current - currentProgressRef.current
-      if (Math.abs(diff) > 0.05) {
-        currentProgressRef.current += diff * 0.08
-        setScrollProgress(currentProgressRef.current)
-      } else {
-        currentProgressRef.current = targetProgressRef.current
-        setScrollProgress(currentProgressRef.current)
-      }
-      rafId = requestAnimationFrame(tick)
-    }
-    rafId = requestAnimationFrame(tick)
-    return () => cancelAnimationFrame(rafId)
-  }, [])
 
   // Dimension & scroll tracking for the vertical columns showcase (Skiper30)
   const galleryRef = useRef<HTMLDivElement>(null)
@@ -700,149 +936,8 @@ export default function App() {
         </div>
       </section>
 
-      {/* Services Grid Section - Scroll-driven horizontal slide panel */}
-      <section 
-        id="services" 
-        ref={servicesRef} 
-        style={{ height: '500vh' }}
-        className="relative w-full bg-white z-20"
-      >
-        
-        {/* Sticky inner viewport */}
-        <div 
-          style={{ height: '100vh' }}
-          className="sticky top-0 w-full overflow-hidden flex flex-col justify-center"
-        >
-          
-          {/* Header Progress indicator */}
-          <div className="w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 pt-12 flex justify-between items-end border-b border-neutral-100 pb-4 shrink-0">
-            <div>
-              <span className="text-xs font-semibold tracking-[0.25em] text-neutral-400 uppercase mb-2 block">
-                OUR SERVICES
-              </span>
-              <h2 className="font-outfit text-2xl sm:text-3xl font-extrabold text-minimal-black">
-                Bespoke Experiences. One by One.
-              </h2>
-            </div>
-            <div className="flex gap-2 text-xs font-bold tracking-widest text-neutral-400 uppercase">
-              <span>SCROLL DOWN TO ADVANCE</span>
-              <span>&bull;</span>
-              <span className="text-minimal-black">0{Math.min(Math.floor(scrollProgress / 18) + 1, 6)} / 06</span>
-            </div>
-          </div>
-
-          {/* Horizontal Slide container track */}
-          <div className="flex-1 flex items-center">
-            <div 
-              style={{
-                width: '600vw',
-                transform: `translateX(-${(scrollProgress / 100) * 5 * 100}vw)`,
-                transition: 'none' // Disable CSS transitions for fluid JS animation LERP
-              }}
-              className="flex flex-row flex-nowrap h-[75vh] shrink-0"
-            >
-              {services.map((service, index) => (
-                <div 
-                  key={service.title} 
-                  style={{ width: '100vw' }}
-                  className="h-full shrink-0 flex flex-col lg:flex-row items-center px-6 sm:px-10 lg:px-16 max-w-7xl mx-auto gap-8 lg:gap-16"
-                >
-                  
-                  {/* Left Column: Image base layer that plays video on hover */}
-                  <div className="w-full lg:w-1/2 h-[40%] lg:h-[90%] relative overflow-hidden border border-neutral-200 shadow-md group cursor-pointer">
-                    
-                    {/* Related Stock Image base layer */}
-                    <img
-                      src={service.imageUrl}
-                      alt={service.title}
-                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                      loading="lazy"
-                    />
-
-                    {/* Related Stock Video overlay loop playing silently on hover */}
-                    <video
-                      src={service.videoUrl}
-                      autoPlay
-                      muted
-                      loop
-                      playsInline
-                      ref={(el) => { 
-                        if (el) { 
-                          el.muted = true; 
-                          el.play().catch(() => {}); 
-                        } 
-                      }}
-                      className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                    />
-
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent pointer-events-none" />
-                    
-                    {/* Visual Hover State indicator */}
-                    <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm border border-neutral-200 px-3 py-1 text-[8px] font-bold tracking-widest uppercase text-minimal-black group-hover:bg-minimal-black group-hover:text-white transition-colors duration-300">
-                      HOVER TO WATCH PREVIEW
-                    </div>
-
-                    <span className="absolute bottom-4 left-6 font-outfit text-5xl lg:text-7xl font-black text-white/20 select-none">
-                      0{index + 1}
-                    </span>
-                  </div>
-
-                  {/* Right Column: Editorial Copy */}
-                  <div className="w-full lg:w-1/2 flex flex-col items-start justify-center pr-4">
-                    <span className="text-[10px] font-bold tracking-widest text-neutral-400 uppercase mb-3 flex items-center gap-2">
-                      <Sparkles className="w-4 h-4 text-minimal-black animate-pulse" />
-                      SERVICE FOCUS
-                    </span>
-                    <h3 className="font-outfit text-2xl sm:text-4xl font-extrabold text-minimal-black tracking-tight mb-5 leading-tight">
-                      {service.title}
-                    </h3>
-                    <p className="text-sm text-neutral-500 leading-relaxed mb-6 font-inter">
-                      {service.desc}
-                    </p>
-
-                    {/* Highlights check list */}
-                    <div className="space-y-2 mb-8">
-                      {service.highlights.map((point) => (
-                        <div key={point} className="flex items-center gap-3 text-xs text-neutral-600 font-semibold tracking-wide uppercase">
-                          <div className="w-5 h-5 rounded-full border border-neutral-200 flex items-center justify-center bg-neutral-50">
-                            <Check className="w-3 h-3 text-minimal-black" />
-                          </div>
-                          <span>{point}</span>
-                        </div>
-                      ))}
-                    </div>
-
-                    {/* Interactive anchor trigger */}
-                    <button
-                      onClick={() => {
-                        setSelectedService(service.title)
-                        const portal = document.getElementById('book')
-                        if (portal) {
-                          portal.scrollIntoView({ behavior: 'smooth' })
-                        }
-                      }}
-                      className="inline-flex items-center gap-2 bg-minimal-black text-white font-outfit text-xs font-bold tracking-widest uppercase px-6 py-3.5 hover:bg-neutral-800 transition-colors duration-300"
-                    >
-                      CONFIGURE IN PORTAL
-                      <ArrowRight className="w-4 h-4 text-white" />
-                    </button>
-                  </div>
-
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Visual bottom slide indicator line */}
-          <div className="w-full h-[4px] bg-neutral-100 mt-auto shrink-0">
-            <div 
-              style={{ width: `${scrollProgress}%` }}
-              className="h-full bg-minimal-black transition-all duration-100"
-            />
-          </div>
-
-        </div>
-      </section>
+      {/* Services Grid Section - Pinned horizontal storytelling section */}
+      <ServicesSection setSelectedService={setSelectedService} />
 
       {/* Skiper30 - Showcase vertical multi-column parallax photo gallery */}
       <section id="works" className="relative py-24 sm:py-32 bg-white border-t border-b border-neutral-100 overflow-hidden z-10">
