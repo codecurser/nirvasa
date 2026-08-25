@@ -30,8 +30,6 @@ const navLinks = [
   { name: 'Home', href: '#' },
   { name: 'About Us', href: '#about' },
   { name: 'Services', href: '#services' },
-  { name: 'Corporate Event', href: '#services' },
-  { name: 'Wedding', href: '#services' },
   { name: 'Showcase', href: '#works' },
   { name: 'Blogs', href: '#blogs' },
   { name: 'Contact Us', href: '#book' },
@@ -704,26 +702,26 @@ export default function App() {
         className="fixed top-0 left-0 h-[2px] bg-minimal-black z-50 transition-all duration-100"
       />
 
-      {/* Header / Navbar - Transparent overlaying the Hero Video */}
-      <header className="absolute top-0 left-0 right-0 z-40 bg-gradient-to-b from-black/50 via-black/25 to-transparent text-white">
-        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-6 flex items-center justify-between">
+      {/* Header / Navbar - Merged directly over Hero Video */}
+      <header className="absolute top-0 left-0 right-0 z-40 bg-gradient-to-b from-black/80 via-black/40 to-transparent text-white transition-all duration-300">
+        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-5 flex items-center justify-between">
           
-          {/* Logo image update */}
+          {/* Logo image */}
           <a href="#" className="flex items-center gap-3 group py-1">
             <img 
               src={logoImg} 
               alt="Navrassaa Events Logo" 
-              className="h-10 sm:h-12 md:h-14 w-auto object-contain transition-transform duration-300 group-hover:scale-105 filter drop-shadow-[0_2px_10px_rgba(255,255,255,0.4)]"
+              className="h-10 sm:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105 filter drop-shadow-[0_2px_12px_rgba(255,255,255,0.45)]"
             />
           </a>
 
-          {/* Desktop Nav - Horizontal listing */}
+          {/* Desktop Nav - Horizontal listing merged over video */}
           <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
-                className="text-[11px] font-bold tracking-widest text-white/80 uppercase hover:text-white hover:border-b border-white pb-1 transition-all duration-200"
+                className="text-xs font-bold text-white/90 uppercase tracking-widest hover:text-amber-400 transition-colors duration-200 drop-shadow-sm"
               >
                 {link.name}
               </a>
@@ -734,10 +732,10 @@ export default function App() {
           <div className="hidden lg:block">
             <a
               href="#book"
-              className="inline-flex items-center gap-2 border border-white/40 hover:border-white px-5 py-2.5 text-white font-outfit text-[10px] font-bold tracking-widest uppercase hover:bg-white/10 transition-colors duration-300"
+              className="inline-flex items-center gap-2 border border-white/40 hover:border-amber-400 bg-black/40 hover:bg-amber-500 hover:text-black text-white px-5 py-2.5 font-outfit text-xs font-bold tracking-widest uppercase transition-all duration-300 rounded-sm backdrop-blur-sm shadow-lg"
             >
               BOOK CONSULTATION
-              <ArrowRight className="w-3.5 h-3.5 text-white" />
+              <ArrowRight className="w-3.5 h-3.5" />
             </a>
           </div>
 
@@ -780,7 +778,7 @@ export default function App() {
                 key={link.name}
                 href={link.href}
                 onClick={() => setMenuOpen(false)}
-                className={`font-outfit text-2xl text-minimal-black uppercase tracking-widest hover:text-neutral-500 transition-all duration-500 transform ${
+                className={`font-outfit text-2xl text-minimal-black uppercase tracking-widest hover:text-amber-600 transition-all duration-500 transform ${
                   menuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
                 }`}
                 style={{ transitionDelay: `${i * 80 + 100}ms` }}
@@ -812,15 +810,13 @@ export default function App() {
         </div>
       </div>
 
-      {/* Hero Section - Full-bleed video background with luxury overlays */}
+      {/* Hero Section - Pure Unobstructed Full-Bleed Video Background */}
       <section 
         id="hero"
-        onMouseMove={handleHeroMouseMove}
-        onMouseLeave={handleHeroMouseLeave}
         style={{ opacity: heroOpacity, transform: `scale(${heroScale})` }}
-        className="relative w-full min-h-screen flex flex-col justify-between items-center text-center px-6 pt-28 pb-12 z-10 preserve-3d overflow-hidden"
+        className="relative w-full h-[50vh] sm:h-[60vh] lg:h-[65vh] flex flex-col justify-end items-center text-center px-6 pb-16 z-10 preserve-3d overflow-hidden"
       >
-        {/* Full-bleed video background with gradient vignette overlay */}
+        {/* Crystal Clear full-bleed video background */}
         <div className="absolute inset-0 w-full h-full overflow-hidden z-0">
           <video
             src="/genrate_an_video_for_the_hero.mp4"
@@ -835,66 +831,69 @@ export default function App() {
                 el.play().catch((err) => console.log('Autoplay blocked:', err)); 
               } 
             }}
-            className="w-full h-full object-cover scale-105 filter brightness-90 contrast-105"
+            className="w-full h-full object-cover filter brightness-100 contrast-100"
           />
-          {/* Dual-layer rich vignette & contrast overlay */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/30 to-black/90 z-10" />
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-transparent via-black/30 to-black/80 z-10" />
         </div>
-
-        {/* Hero Central Content */}
-        <div className="relative z-20 max-w-5xl mx-auto flex flex-col items-center my-auto pt-6 preserve-3d">
-          
-          {/* Featured Official Brand Logo Graphic */}
-          <div 
-            style={{
-              transform: `perspective(1000px) rotateY(${heroRotate.x}deg) rotateX(${heroRotate.y}deg) translateZ(40px)`,
-              transition: 'transform 0.15s ease-out'
-            }}
-            className="mb-8 transition-all duration-300 hover:scale-105"
-          >
-            <img 
-              src={logoImg} 
-              alt="Navrassaa Events Logo" 
-              className="h-32 sm:h-44 md:h-56 lg:h-64 w-auto object-contain filter drop-shadow-[0_0_35px_rgba(255,255,255,0.55)]"
-            />
-          </div>
-
-          {/* Subtitle Tagline */}
-          <p className="font-inter text-neutral-200 text-xs sm:text-sm md:text-base max-w-2xl uppercase tracking-[0.35em] font-semibold text-center mb-10 translate-z-10 drop-shadow-md">
-            Turning Bespoke Gatherings into Extraordinary Legacy
-          </p>
-
-          {/* Action CTAs */}
-          <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 z-30 translate-z-20">
-            <a
-              href="#book"
-              className="inline-flex items-center gap-3 bg-gradient-to-r from-amber-500 via-amber-600 to-amber-700 hover:from-amber-400 hover:to-amber-600 text-black font-outfit text-xs font-black tracking-[0.2em] uppercase px-8 py-4 rounded-none shadow-gold-glow hover:scale-105 transition-all duration-300"
-            >
-              BOOK CONSULTATION
-              <ArrowRight className="w-4 h-4 text-black" />
-            </a>
-
-            <a
-              href="#services"
-              className="inline-flex items-center gap-2 border border-white/40 hover:border-white bg-black/40 hover:bg-white/10 backdrop-blur-md text-white font-outfit text-xs font-bold tracking-[0.2em] uppercase px-8 py-4 rounded-none transition-all duration-300"
-            >
-              EXPLORE SERVICES
-              <Sparkles className="w-4 h-4 text-amber-300" />
-            </a>
-          </div>
-
-        </div>
-
-        {/* Hero Bottom - Minimal Scroll Indicator */}
-        <div className="relative z-20 w-full max-w-6xl mx-auto flex items-center justify-center pt-6 border-t border-white/15">
-          <a href="#about" className="inline-flex items-center gap-2 text-[10px] font-bold tracking-widest text-white/70 hover:text-white uppercase transition-colors animate-bounce-slow">
-            <span>SCROLL TO DISCOVER</span>
-            <ArrowRight className="w-3 h-3 rotate-90" />
-          </a>
-        </div>
-
       </section>
+
+      {/* 4 Overlapping Feature Cards - Placed at the bottom edge of Hero Video */}
+      <div className="relative -mt-16 sm:-mt-20 z-30 max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          
+          {/* Feature Card 1 */}
+          <a href="#services" className="group bg-white rounded-lg border border-neutral-200/80 p-6 flex flex-col items-center text-center shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
+            <div className="w-14 h-14 rounded-2xl bg-purple-50 text-purple-600 flex items-center justify-center mb-4 group-hover:bg-purple-600 group-hover:text-white transition-colors duration-300 shadow-sm">
+              <Briefcase className="w-7 h-7" />
+            </div>
+            <h4 className="font-outfit text-base font-extrabold text-neutral-900 uppercase tracking-wide group-hover:text-purple-600 transition-colors">
+              CORPORATE EVENTS
+            </h4>
+            <p className="text-xs text-neutral-500 mt-2 font-inter leading-relaxed">
+              Summits, keynotes & corporate galas executed with authority.
+            </p>
+          </a>
+
+          {/* Feature Card 2 */}
+          <a href="#services" className="group bg-white rounded-lg border border-neutral-200/80 p-6 flex flex-col items-center text-center shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
+            <div className="w-14 h-14 rounded-2xl bg-pink-50 text-pink-600 flex items-center justify-center mb-4 group-hover:bg-pink-600 group-hover:text-white transition-colors duration-300 shadow-sm">
+              <Heart className="w-7 h-7" />
+            </div>
+            <h4 className="font-outfit text-base font-extrabold text-neutral-900 uppercase tracking-wide group-hover:text-pink-600 transition-colors">
+              PALACE WEDDINGS
+            </h4>
+            <p className="text-xs text-neutral-500 mt-2 font-inter leading-relaxed">
+              Royal heritage celebrations & coastal destination mandaps.
+            </p>
+          </a>
+
+          {/* Feature Card 3 */}
+          <a href="#services" className="group bg-white rounded-lg border border-neutral-200/80 p-6 flex flex-col items-center text-center shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
+            <div className="w-14 h-14 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center mb-4 group-hover:bg-amber-600 group-hover:text-white transition-colors duration-300 shadow-sm">
+              <Sparkles className="w-7 h-7" />
+            </div>
+            <h4 className="font-outfit text-base font-extrabold text-neutral-900 uppercase tracking-wide group-hover:text-amber-600 transition-colors">
+              PRODUCTION & LIGHTING
+            </h4>
+            <p className="text-xs text-neutral-500 mt-2 font-inter leading-relaxed">
+              Immersive stage design, spatial audio & visual architecture.
+            </p>
+          </a>
+
+          {/* Feature Card 4 */}
+          <a href="#services" className="group bg-white rounded-lg border border-neutral-200/80 p-6 flex flex-col items-center text-center shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
+            <div className="w-14 h-14 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center mb-4 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300 shadow-sm">
+              <Crown className="w-7 h-7" />
+            </div>
+            <h4 className="font-outfit text-base font-extrabold text-neutral-900 uppercase tracking-wide group-hover:text-blue-600 transition-colors">
+              LUXURY HOSPITALITY
+            </h4>
+            <p className="text-xs text-neutral-500 mt-2 font-inter leading-relaxed">
+              Seamless guest relations, concierge & VIP arrival experiences.
+            </p>
+          </a>
+
+        </div>
+      </div>
 
       {/* The Studio / About Section */}
       <section 
