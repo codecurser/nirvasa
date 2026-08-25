@@ -559,7 +559,6 @@ function ServicesSection({
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [scrollY, setScrollY] = useState(0)
-  const [heroRotate, setHeroRotate] = useState({ x: 0, y: 0 })
   const [selectedService, setSelectedService] = useState<string>('Entire Wedding Planning')
   const [selectedLocation, setSelectedLocation] = useState<string>('Luxury Estate')
   const [guestCount, setGuestCount] = useState<number>(250)
@@ -654,19 +653,7 @@ export default function App() {
   ]
   const iconCenterIndex = Math.floor(eventIcons.length / 2)
 
-  // Mouse move handler for Hero 3D elements
-  const handleHeroMouseMove = (e: React.MouseEvent) => {
-    const { clientX, clientY } = e
-    const { innerWidth, innerHeight } = window
-    const x = (clientX - innerWidth / 2) / (innerWidth / 2) // -1 to 1
-    const y = (clientY - innerHeight / 2) / (innerHeight / 2) // -1 to 1
-    setHeroRotate({ x: x * 8, y: -y * 8 })
-  }
-
-  const handleHeroMouseLeave = () => {
-    setHeroRotate({ x: 0, y: 0 })
-  }
-
+  // Handle booking form submission
   const handleBookingSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     setFormSubmitted(true)
