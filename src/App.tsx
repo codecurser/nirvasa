@@ -2,6 +2,9 @@ import { useState, useEffect, useRef } from 'react'
 import { motion, MotionValue, useScroll, useTransform, useMotionValueEvent, AnimatePresence } from 'framer-motion'
 import Lenis from 'lenis'
 import logoImg from './assets/logo_transparent.png'
+import { BlogSection } from './components/BlogSection'
+import { BlogDetailPage } from './components/BlogDetailPage'
+import type { BlogPost } from './types/blog'
 import { 
   ArrowRight, 
   Award, 
@@ -30,7 +33,7 @@ const navLinks = [
   { name: 'Corporate Event', href: '#services' },
   { name: 'Wedding', href: '#services' },
   { name: 'Showcase', href: '#works' },
-  { name: 'Blogs', href: '#cinematic' },
+  { name: 'Blogs', href: '#blogs' },
   { name: 'Contact Us', href: '#book' },
 ]
 
@@ -564,6 +567,7 @@ export default function App() {
   const [guestCount, setGuestCount] = useState<number>(250)
   const [formSubmitted, setFormSubmitted] = useState<boolean>(false)
   const [activeVideoModal, setActiveVideoModal] = useState<string | null>(null)
+  const [selectedBlogPost, setSelectedBlogPost] = useState<BlogPost | null>(null)
   
   // Track scroll position for header animations
   useEffect(() => {
@@ -675,6 +679,21 @@ export default function App() {
 
   const heroOpacity = Math.max(1 - scrollY / 650, 0)
   const heroScale = Math.max(1 - scrollY / 2500, 0.95)
+
+  if (selectedBlogPost) {
+    return (
+      <BlogDetailPage
+        post={selectedBlogPost}
+        onBack={() => setSelectedBlogPost(null)}
+        onBookConsultation={() => {
+          setSelectedBlogPost(null)
+          setTimeout(() => {
+            document.getElementById('book')?.scrollIntoView({ behavior: 'smooth' })
+          }, 150)
+        }}
+      />
+    )
+  }
 
   return (
     <div className="relative bg-white text-minimal-black w-full min-h-screen font-inter select-none bg-grid-pattern">
@@ -968,6 +987,11 @@ export default function App() {
 
         </div>
       </section>
+
+      {/* Curated Blog Section */}
+      <BlogSection 
+        onSelectPost={(post) => setSelectedBlogPost(post)} 
+      />
 
       {/* Skiper31 - Transition folds right before the booking portal */}
       <section className="relative w-full bg-[#f5f4f3] border-t border-b border-neutral-200 py-24 z-10">
