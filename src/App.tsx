@@ -575,6 +575,8 @@ export default function App() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  const lenisRef = useRef<Lenis | null>(null)
+
   // Initialize Lenis smooth scroll globally on mount
   useEffect(() => {
     const lenis = new Lenis({
@@ -582,6 +584,7 @@ export default function App() {
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // standard smooth easing
       smoothWheel: true
     })
+    lenisRef.current = lenis
 
     const raf = (time: number) => {
       lenis.raf(time)
@@ -589,8 +592,21 @@ export default function App() {
     }
 
     requestAnimationFrame(raf)
-    return () => lenis.destroy()
+    return () => {
+      lenis.destroy()
+      lenisRef.current = null
+    }
   }, [])
+
+  // Pause/Resume Lenis when blog detail page overlay is open
+  useEffect(() => {
+    if (!lenisRef.current) return
+    if (selectedBlogPost) {
+      lenisRef.current.stop()
+    } else {
+      lenisRef.current.start()
+    }
+  }, [selectedBlogPost])
 
 
 
@@ -664,21 +680,6 @@ export default function App() {
 
   const heroOpacity = Math.max(1 - scrollY / 650, 0)
   const heroScale = Math.max(1 - scrollY / 2500, 0.95)
-
-  if (selectedBlogPost) {
-    return (
-      <BlogDetailPage
-        post={selectedBlogPost}
-        onBack={() => setSelectedBlogPost(null)}
-        onBookConsultation={() => {
-          setSelectedBlogPost(null)
-          setTimeout(() => {
-            document.getElementById('book')?.scrollIntoView({ behavior: 'smooth' })
-          }, 150)
-        }}
-      />
-    )
-  }
 
   return (
     <div className="relative bg-white text-minimal-black w-full min-h-screen font-inter select-none bg-grid-pattern">
@@ -1435,6 +1436,22 @@ export default function App() {
 
         </div>
       </footer>
+
+      {/* Blog Article Detail Overlay */}
+      <AnimatePresence>
+        {selectedBlogPost && (
+          <BlogDetailPage
+            post={selectedBlogPost}
+            onBack={() => setSelectedBlogPost(null)}
+            onBookConsultation={() => {
+              setSelectedBlogPost(null)
+              setTimeout(() => {
+                document.getElementById('book')?.scrollIntoView({ behavior: 'smooth' })
+              }, 150)
+            }}
+          />
+        )}
+      </AnimatePresence>
 
     </div>
   )

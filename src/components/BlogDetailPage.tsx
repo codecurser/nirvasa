@@ -12,8 +12,16 @@ interface BlogDetailPageProps {
 
 export function BlogDetailPage({ post, onBack, onBookConsultation }: BlogDetailPageProps) {
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'instant' })
-  }, [post])
+    document.body.style.overflow = 'hidden'
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onBack()
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    return () => {
+      document.body.style.overflow = ''
+      window.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [onBack, post])
 
   const handleShare = () => {
     if (navigator.share) {
@@ -30,11 +38,14 @@ export function BlogDetailPage({ post, onBack, onBookConsultation }: BlogDetailP
 
   return (
     <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
+      initial={{ opacity: 0, y: 15 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: 15 }}
       transition={{ duration: 0.3 }}
-      className="min-h-screen bg-white text-minimal-black font-inter selection:bg-minimal-black selection:text-white"
+      data-lenis-prevent
+      data-lenis-prevent-wheel
+      data-lenis-prevent-touch
+      className="fixed inset-0 z-50 bg-white text-minimal-black font-inter selection:bg-minimal-black selection:text-white overflow-y-auto"
     >
       {/* Top Sticky Header */}
       <header className="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-neutral-200">
