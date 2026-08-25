@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion, MotionValue, useScroll, useTransform, useMotionValueEvent, AnimatePresence } from 'framer-motion'
-import Lenis from 'lenis'
 import logoImg from './assets/logo_transparent.png'
 import { 
   ArrowRight, 
@@ -15,7 +14,8 @@ import {
   Utensils, 
   X, 
   MessageSquare,
-  Check
+  Check,
+  BookOpen
 } from 'lucide-react'
 
 // Simple cn utility for classnames
@@ -27,10 +27,8 @@ const navLinks = [
   { name: 'Home', href: '#' },
   { name: 'About Us', href: '#about' },
   { name: 'Services', href: '#services' },
-  { name: 'Corporate Event', href: '#services' },
-  { name: 'Wedding', href: '#services' },
   { name: 'Showcase', href: '#works' },
-  { name: 'Blogs', href: '#cinematic' },
+  { name: 'Blogs', href: '#blogs' },
   { name: 'Contact Us', href: '#book' },
 ]
 
@@ -123,6 +121,157 @@ const cinematicVideos = [
     desc: 'Monumental stage designs, lighting arrays, and public operations.',
     videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-crowd-of-people-at-a-concert-41680-large.mp4',
     imageUrl: 'https://images.unsplash.com/photo-1506157786151-b8491531f063?q=80&w=800',
+  }
+]
+
+const blogs = [
+  {
+    id: 'how-to-plan-a-luxury-event',
+    title: 'How to Plan a Luxury Event That Feels Personal, Not Overdone',
+    subtitle: 'Why modern luxury is about intentionality, personal storytelling, and knowing what deserves to be there.',
+    category: 'Event Philosophy',
+    date: 'AUG 25, 2026',
+    readTime: '6 MIN READ',
+    author: 'Navrassaa Editorial Team',
+    authorRole: 'Bespoke Experience Curators',
+    imageUrl: '/luxury_event_blog.jpg',
+    excerpt: 'Luxury events are no longer about having the biggest stage or largest guest list. Today, true luxury is about creating an experience that feels intentional, personal, and unforgettable.',
+    content: [
+      'Luxury events are no longer about having the biggest stage, the most elaborate décor, or the largest guest list.',
+      'Today, luxury is about creating an experience that feels intentional, personal, and unforgettable.',
+      'Whether it is a wedding, corporate celebration, private gathering, or destination event, the most memorable celebrations are the ones where every detail feels connected to the people and the story behind the occasion.',
+      '# Start With a Story, Not Just a Theme',
+      'One of the biggest mistakes in event planning is starting with décor.',
+      'Before choosing flowers, colours, stages, or installations, start by defining the feeling you want the event to create.',
+      'Should it feel intimate and romantic? Grand and glamorous? Modern and minimal? Traditional and rooted?',
+      'Once the story is clear, the décor, entertainment, food, lighting, and guest experience can all be designed around it.',
+      'A strong concept ensures that the event feels cohesive rather than simply decorated.',
+      '# Personalisation Is the New Luxury',
+      'The most luxurious events often have details that could belong to no one else.',
+      'Personalisation can be subtle but powerful. Custom invitations, curated menus, meaningful photographs, signature drinks, personalised guest gifts, custom installations, or entertainment inspired by the host\'s story can make a celebration feel truly unique.',
+      'The goal is not to personalise everything. It is to personalise the details that matter.',
+      '# Let the Venue Become Part of the Experience',
+      'A venue is much more than a location.',
+      'Its architecture, surroundings, lighting, layout, and character can influence the entire event.',
+      'The right venue should complement the concept instead of requiring the concept to constantly work around it.',
+      'For destination celebrations especially, incorporating elements of the location into the décor, food, entertainment, or guest experience can make the event feel more authentic and memorable.',
+      '# Focus on the Guest Journey',
+      'Luxury is also about how guests feel throughout the event.',
+      'Think beyond the entrance.',
+      'How are guests welcomed? What do they experience when they arrive? How easily can they navigate the venue? What surprises them? How smoothly does the event move from one moment to another?',
+      'A well-planned guest journey makes an event feel effortless. And that feeling of effortlessness is often the result of extremely detailed planning behind the scenes.',
+      '# Don\'t Underestimate Lighting and Entertainment',
+      'Décor may create the visual identity, but lighting and entertainment create the atmosphere.',
+      'Thoughtful lighting can completely transform a venue, while carefully selected entertainment can control the energy of the celebration.',
+      'The best entertainment does not simply fill time. It creates moments that guests remember.',
+      'From live performances to curated music, interactive experiences, or unexpected surprises, every element should have a purpose.',
+      '# What Happens Behind the Scenes Matters',
+      'A beautiful event requires much more than beautiful ideas.',
+      'Vendor coordination, production, timelines, rehearsals, logistics, guest management, technical requirements, and contingency planning all need to work together.',
+      'This is where professional event management makes a difference.',
+      'The guests should experience a celebration that feels effortless, while the team behind the scenes ensures that every moving part stays on track.',
+      '# The Navrassaa Approach',
+      'At Navrassaa Events, the focus should be on creating celebrations that feel distinctive rather than simply following what is trending.',
+      'From the first concept to the final guest departure, every detail should contribute to one larger experience.',
+      'Because true luxury is not about adding more. It is about knowing what deserves to be there.',
+      '# Final Thoughts',
+      'A luxury event should not leave guests remembering how much was spent. It should leave them remembering how they felt.',
+      'The atmosphere, the details, the hospitality, the entertainment, the unexpected moments, and the story behind it all come together to create something people remember long after the event is over.',
+      'That is the difference between an event that looks beautiful and an experience that truly stays with you.'
+    ],
+    takeaways: [
+      'Define the emotional story before choosing flowers, colours, or stages.',
+      'Personalise the details that matter to make celebrations distinctive.',
+      'True luxury is not about adding more—it is knowing what deserves to be there.'
+    ]
+  },
+  {
+    id: 'architectural-lighting',
+    title: 'Architectural Lighting in Modern Luxury Weddings',
+    subtitle: 'How ambient temperature, structural LED arrays, and geometric shadows define the atmosphere of evening ceremonies.',
+    category: 'Wedding Design',
+    date: 'AUG 18, 2026',
+    readTime: '5 MIN READ',
+    author: 'Elena Rostova',
+    authorRole: 'Chief Lighting Director',
+    imageUrl: 'https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1200',
+    excerpt: 'Lighting is not merely illumination—it is spatial choreography. Explore how custom lighting paths create emotional transitions from sunset reception to midnight celebrations.',
+    content: [
+      'In high-end event production, light is a fundamental structural material. Far beyond simple spotlights, architectural lighting defines how guests perceive scale, intimacy, and luxury.',
+      'When designing a Lake Como estate or a historic Paris pavilion, our lighting architects blueprint three distinct layers: Ambient Temperature, Focal Geometry, and Shadow Contrast. Warm 2700K tungsten tones ground human interactions, while subtle 3200K highlights elevate floral textures.',
+      'By synchronizing illumination intensity with the evening progression—soft diffused radiance during vows, dramatic narrow beams during dining, and immersive dynamic arrays during late-night performances—we engineer unforgettable sensory environments.'
+    ],
+    takeaways: [
+      'Layered color temperatures (2700K–3200K) preserve natural skin tones in high-res photography.',
+      'Wireless DMX routing avoids intrusive cabling across historic marble and garden grounds.',
+      'Dynamic dimming schedules align seamlessly with dinner courses and live acoustic set changes.'
+    ]
+  },
+  {
+    id: 'spatial-flow-summits',
+    title: 'Designing Spatial Flow for High-Stakes Corporate Summits',
+    subtitle: 'Eliminating spatial bottlenecks and engineering fluid networking hubs to project corporate prestige.',
+    category: 'Corporate Architecture',
+    date: 'AUG 12, 2026',
+    readTime: '4 MIN READ',
+    author: 'Marcus Thorne',
+    authorRole: 'Spatial Strategist',
+    imageUrl: 'https://images.unsplash.com/photo-1511578314322-379afb476865?q=80&w=1200',
+    excerpt: 'A seamless corporate summit relies on invisible geometry. Discover how stage positioning and transit corridors drive attendee engagement.',
+    content: [
+      'When international executives gather, spatial congestion directly impacts networking efficiency. The spatial layout of a keynote hall must feel authoritative yet effortlessly accessible.',
+      'Our approach centers on radial movement corridors radiating from the central mainstage to curated lounge alcoves. By incorporating sound-dampening architectural baffles and symmetrical lounge clusters, attendees transition naturally between keynote speeches and high-value conversations.',
+      'Integrated LED backdrop arrays, hidden broadcast camera rigs, and clean perimeter access ensure executive speakers command maximum presence without visual distraction.'
+    ],
+    takeaways: [
+      'Radial layout geometries optimize delegate movement and eliminate doorway bottlenecks.',
+      'Acoustic partitioning maintains speech clarity during multi-track breakout sessions.',
+      'Concealed technical channels keep stages visually pristine for global press feeds.'
+    ]
+  },
+  {
+    id: 'haute-gastronomy-staging',
+    title: 'The Geometry of Haute Gastronomy Plating & Staging',
+    subtitle: 'Harmonizing Michelin-caliber multi-course menus with minimalist table settings and signature cocktail staging.',
+    category: 'Gastronomy & Dining',
+    date: 'AUG 05, 2026',
+    readTime: '6 MIN READ',
+    author: 'Chef Jean-Luc Vane',
+    authorRole: 'Culinary Curator',
+    imageUrl: 'https://images.unsplash.com/photo-1555244162-803834f70033?q=80&w=1200',
+    excerpt: 'Dining at a luxury gathering is an immersive theatrical performance. Explore how bespoke tableware and spatial staging transform fine dining.',
+    content: [
+      'A memorable banquet is an intricate harmony between culinary artistry and spatial aesthetics. Table geometry, linen textures, and mixology bar placement set the tone long before the first course arrives.',
+      'We collaborate directly with world-class chefs to design custom staging elements—from raw stone display platters to sculpted ice cocktail stations. Table layouts are calculated down to the millimeter to allow flawless synchronized waiter service across 300+ guests simultaneously.',
+      'Every dish is paired with localized accent lighting that highlights color, steam, and artisanal plating details, elevating the meal into a multi-sensory spectacle.'
+    ],
+    takeaways: [
+      'Synchronized service grids ensure all tables receive hot courses within 45 seconds.',
+      'Custom-cast tableware matches the event’s architectural color palette.',
+      'Dedicated mixology staging creates interactive focal points during cocktail hours.'
+    ]
+  },
+  {
+    id: 'destination-lake-como',
+    title: 'Destination Logistics: Executing Flawless Lake Como Ceremonies',
+    subtitle: 'Overcoming lakeside terrain challenges, barge stage transport, and climate contingencies in northern Italy.',
+    category: 'Wedding Design',
+    date: 'JUL 28, 2026',
+    readTime: '7 MIN READ',
+    author: 'Aurelia Chen',
+    authorRole: 'Lead Operations Architect',
+    imageUrl: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=1200',
+    excerpt: 'Behind every romantic Lake Como wedding is a masterclass in heavy logistics, water transit coordination, and climate precision.',
+    content: [
+      'Lake Como’s historic villas present breathtaking backdrops alongside complex operational constraints—narrow cobblestone alleys, strict noise curfews, and water-only access points for heavy staging equipment.',
+      'Executing a 3-day luxury wedding union on the lake requires floating barge sound stages, custom-engineered glass canopies for weather protection, and water-taxi fleet management synchronized to the second.',
+      'By establishing dedicated staging hubs on shore and conducting detailed micro-climate monitoring, our production team guarantees flawless execution regardless of sudden alpine weather shifts.'
+    ],
+    takeaways: [
+      'Watercraft logistics and barge staging expand usable venue footprint onto the lake.',
+      'Transparent glass structural canopies preserve 360° lake views during rain contingencies.',
+      'Local heritage authority compliance secures late-night music permissions smoothly.'
+    ]
   }
 ]
 
@@ -564,6 +713,9 @@ export default function App() {
   const [guestCount, setGuestCount] = useState<number>(250)
   const [formSubmitted, setFormSubmitted] = useState<boolean>(false)
   const [activeVideoModal, setActiveVideoModal] = useState<string | null>(null)
+  const [selectedBlogCategory, setSelectedBlogCategory] = useState<string>('All')
+  const [expandedBlog, setExpandedBlog] = useState<typeof blogs[0] | null>(null)
+  const blogReaderRef = useRef<HTMLDivElement | null>(null)
   
   // Track scroll position for header animations
   useEffect(() => {
@@ -572,23 +724,6 @@ export default function App() {
     }
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
-
-  // Initialize Lenis smooth scroll globally on mount
-  useEffect(() => {
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // standard smooth easing
-      smoothWheel: true
-    })
-
-    const raf = (time: number) => {
-      lenis.raf(time)
-      requestAnimationFrame(raf)
-    }
-
-    requestAnimationFrame(raf)
-    return () => lenis.destroy()
   }, [])
 
 
@@ -1107,6 +1242,293 @@ export default function App() {
         </div>
       </section>
 
+      {/* Blog & Journal Section - Inline Expandable Editorial Reader */}
+      <section id="blogs" className="relative py-24 sm:py-32 bg-white border-t border-b border-neutral-200/80 z-10">
+        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
+          
+          {/* Section Header */}
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-12 gap-8 border-b border-neutral-100 pb-8">
+            <div className="max-w-2xl">
+              <div className="inline-flex items-center gap-2 px-3 py-1 bg-amber-50 border border-amber-200/80 mb-4">
+                <BookOpen className="w-3.5 h-3.5 text-amber-700" />
+                <span className="text-[10px] font-bold tracking-[0.25em] text-amber-900 uppercase">
+                  EDITORIAL JOURNAL &amp; INSIGHTS
+                </span>
+              </div>
+              <h2 className="font-outfit text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-minimal-black mb-3">
+                The Art of Bespoke Gathering.
+              </h2>
+              <p className="text-neutral-500 text-xs sm:text-sm leading-relaxed font-inter">
+                Production notes, spatial architecture blueprints, lighting choreography, and design philosophy from the Navrassaa studio.
+              </p>
+            </div>
+
+            {/* Category Filter Pills */}
+            <div className="flex flex-wrap items-center gap-2">
+              {['All', 'Event Philosophy', 'Wedding Design', 'Corporate Architecture', 'Gastronomy & Dining'].map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => setSelectedBlogCategory(cat)}
+                  className={`px-4 py-2 border text-[10px] font-bold tracking-widest uppercase transition-all duration-300 cursor-pointer ${
+                    selectedBlogCategory === cat
+                      ? 'border-minimal-black bg-minimal-black text-white shadow-xs'
+                      : 'border-neutral-200 bg-neutral-50 text-neutral-500 hover:border-neutral-400 hover:text-minimal-black'
+                  }`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Inline Expanded Article Reader Panel */}
+          {expandedBlog && (
+            <div ref={blogReaderRef} className="mb-16 bg-white border-2 border-minimal-black p-6 sm:p-10 md:p-14 shadow-2xl relative transition-all duration-500">
+              
+              {/* Top Controls Bar */}
+              <div className="flex flex-wrap items-center justify-between gap-4 pb-6 mb-8 border-b border-neutral-200">
+                <div className="flex items-center gap-3">
+                  <span className="px-3 py-1 bg-amber-100 text-amber-900 border border-amber-300 font-outfit text-[10px] font-extrabold tracking-widest uppercase">
+                    {expandedBlog.category}
+                  </span>
+                  <span className="text-neutral-400 text-xs font-semibold">{expandedBlog.date}</span>
+                  <span className="text-neutral-300">&bull;</span>
+                  <span className="text-neutral-500 text-xs font-semibold flex items-center gap-1">
+                    <Clock className="w-3.5 h-3.5 text-amber-600" />
+                    {expandedBlog.readTime}
+                  </span>
+                </div>
+
+                <button
+                  onClick={() => setExpandedBlog(null)}
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-minimal-black text-white hover:bg-neutral-800 font-outfit text-xs font-bold tracking-widest uppercase transition-colors cursor-pointer"
+                >
+                  <span>CLOSE ESSAY</span>
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+
+              {/* Title & Subtitle */}
+              <h2 className="font-outfit text-3xl sm:text-5xl font-extrabold text-minimal-black leading-tight mb-4 tracking-tight">
+                {expandedBlog.title}
+              </h2>
+              <p className="text-base sm:text-xl font-medium text-neutral-500 italic leading-relaxed border-l-4 border-amber-500 pl-4 py-1 mb-8">
+                {expandedBlog.subtitle}
+              </p>
+
+              {/* Cover Image */}
+              <div className="relative w-full h-[35vh] sm:h-[50vh] overflow-hidden border border-neutral-200 mb-8 bg-neutral-100">
+                <img
+                  src={expandedBlog.imageUrl}
+                  alt={expandedBlog.title}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+
+              {/* Author Byline */}
+              <div className="flex items-center gap-4 py-4 border-y border-neutral-200 mb-8 bg-neutral-50 px-6">
+                <div className="w-10 h-10 rounded-full bg-minimal-black text-amber-300 font-outfit font-black text-lg flex items-center justify-center border border-amber-400/50">
+                  {expandedBlog.author.charAt(0)}
+                </div>
+                <div>
+                  <span className="block font-outfit text-xs font-extrabold text-minimal-black uppercase tracking-wider">
+                    {expandedBlog.author}
+                  </span>
+                  <span className="block text-[10px] text-neutral-400 font-semibold tracking-wider uppercase">
+                    {expandedBlog.authorRole}
+                  </span>
+                </div>
+              </div>
+
+              {/* Article Paragraphs */}
+              <div className="space-y-5 text-base text-neutral-800 leading-[1.8] font-inter mb-12 select-text">
+                {expandedBlog.content.map((p, idx) => {
+                  if (p.startsWith('# ')) {
+                    return (
+                      <div key={idx} className="pt-6 pb-1">
+                        <h3 className="font-outfit text-xl sm:text-2xl font-extrabold text-minimal-black tracking-tight leading-snug">
+                          {p.replace('# ', '')}
+                        </h3>
+                        <div className="w-16 h-1 bg-amber-500 mt-2" />
+                      </div>
+                    )
+                  }
+                  return (
+                    <p key={idx} className="font-normal">
+                      {p}
+                    </p>
+                  )
+                })}
+              </div>
+
+              {/* Key Takeaways */}
+              <div className="bg-neutral-900 text-white p-6 sm:p-8 mb-10 border border-neutral-800">
+                <h4 className="font-outfit text-xs font-black tracking-[0.2em] text-amber-400 uppercase mb-4 flex items-center gap-2">
+                  <Sparkles className="w-4 h-4 text-amber-400" />
+                  ESSENTIAL ESSAY TAKEAWAYS
+                </h4>
+                <ul className="space-y-3 text-xs sm:text-sm text-neutral-300">
+                  {expandedBlog.takeaways.map((item, idx) => (
+                    <li key={idx} className="flex items-start gap-2.5">
+                      <Check className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+                      <span className="leading-relaxed">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Bottom Actions */}
+              <div className="pt-6 border-t border-neutral-200 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <a
+                  href="#book"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 bg-minimal-black text-white font-outfit text-xs font-bold tracking-widest uppercase hover:bg-neutral-800 transition-colors"
+                >
+                  DISCUSS THIS VISION WITH US
+                  <ArrowRight className="w-4 h-4 text-white" />
+                </a>
+
+                <button
+                  onClick={() => setExpandedBlog(null)}
+                  className="w-full sm:w-auto px-6 py-4 border border-neutral-300 hover:border-minimal-black text-minimal-black font-outfit text-xs font-bold tracking-widest uppercase transition-colors text-center cursor-pointer"
+                >
+                  COLLAPSE ESSAY
+                </button>
+              </div>
+
+            </div>
+          )}
+
+          {/* Featured Lead Card (Shows for 'All' or 'Event Philosophy' when not expanded) */}
+          {(!expandedBlog && (selectedBlogCategory === 'All' || selectedBlogCategory === 'Event Philosophy')) && (
+            <div 
+              onClick={() => {
+                setExpandedBlog(blogs[0])
+                setTimeout(() => blogReaderRef.current?.scrollIntoView({ behavior: 'smooth' }), 100)
+              }}
+              className="group mb-12 bg-neutral-900 text-white border border-neutral-800 hover:border-amber-500/50 transition-all duration-500 cursor-pointer shadow-2xl overflow-hidden grid grid-cols-1 lg:grid-cols-12"
+            >
+              {/* Image Side */}
+              <div className="lg:col-span-7 relative min-h-[300px] sm:min-h-[380px] overflow-hidden bg-neutral-950">
+                <img
+                  src={blogs[0].imageUrl}
+                  alt={blogs[0].title}
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-neutral-900 via-neutral-900/30 to-transparent lg:hidden" />
+                <div className="absolute top-4 left-4 z-10 flex items-center gap-2">
+                  <span className="px-3 py-1 bg-amber-500 text-black font-outfit text-[9px] font-black tracking-widest uppercase shadow-md">
+                    FEATURED ESSAY
+                  </span>
+                </div>
+              </div>
+
+              {/* Details Side */}
+              <div className="lg:col-span-5 p-8 sm:p-10 md:p-12 flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center gap-3 text-[10px] font-bold tracking-widest text-amber-400 uppercase mb-4">
+                    <span>{blogs[0].date}</span>
+                    <span>&bull;</span>
+                    <span className="flex items-center gap-1">
+                      <Clock className="w-3 h-3 text-amber-400" />
+                      {blogs[0].readTime}
+                    </span>
+                  </div>
+
+                  <h3 className="font-outfit text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-tight mb-4 group-hover:text-amber-300 transition-colors duration-300">
+                    {blogs[0].title}
+                  </h3>
+
+                  <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed font-inter line-clamp-3 mb-8">
+                    {blogs[0].excerpt}
+                  </p>
+                </div>
+
+                <div className="pt-6 border-t border-neutral-800 flex items-center justify-between">
+                  <span className="inline-flex items-center gap-2 font-outfit text-xs font-black tracking-widest text-amber-400 uppercase group-hover:translate-x-1 transition-transform">
+                    READ FULL ESSAY INLINE
+                    <ArrowRight className="w-4 h-4 text-amber-400" />
+                  </span>
+                  <span className="text-[10px] text-neutral-400 font-semibold tracking-wider uppercase">
+                    {blogs[0].author}
+                  </span>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Compact Small Cards Grid (3 Columns) */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            {blogs
+              .filter((b) => {
+                if (selectedBlogCategory === 'All') return b.id !== blogs[0].id
+                return b.category === selectedBlogCategory
+              })
+              .map((blog) => (
+                <article
+                  key={blog.id}
+                  onClick={() => {
+                    setExpandedBlog(blog)
+                    setTimeout(() => blogReaderRef.current?.scrollIntoView({ behavior: 'smooth' }), 100)
+                  }}
+                  className={`group bg-white border p-5 sm:p-6 transition-all duration-300 hover:shadow-lg cursor-pointer flex flex-col justify-between ${
+                    expandedBlog?.id === blog.id ? 'border-minimal-black ring-2 ring-minimal-black' : 'border-neutral-200/90 hover:border-minimal-black'
+                  }`}
+                >
+                  <div>
+                    {/* Thumbnail Container */}
+                    <div className="relative w-full h-44 sm:h-48 overflow-hidden border border-neutral-200 mb-5 bg-neutral-100">
+                      <img
+                        src={blog.imageUrl}
+                        alt={blog.title}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        loading="lazy"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-30 group-hover:opacity-10 transition-opacity" />
+                      
+                      {/* Category Badge */}
+                      <div className="absolute top-3 left-3">
+                        <span className="px-2.5 py-1 bg-white/95 backdrop-blur-md text-minimal-black font-outfit text-[9px] font-extrabold tracking-widest uppercase shadow-xs border border-neutral-200">
+                          {blog.category}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Meta */}
+                    <div className="flex items-center justify-between text-[10px] font-semibold tracking-widest text-neutral-400 uppercase mb-2">
+                      <span>{blog.date}</span>
+                      <span className="flex items-center gap-1 text-neutral-500">
+                        <Clock className="w-3 h-3 text-amber-600" />
+                        {blog.readTime}
+                      </span>
+                    </div>
+
+                    {/* Title */}
+                    <h3 className="font-outfit text-base sm:text-lg font-bold text-minimal-black group-hover:text-amber-800 transition-colors duration-300 leading-snug mb-2 line-clamp-2">
+                      {blog.title}
+                    </h3>
+
+                    {/* Excerpt */}
+                    <p className="text-xs text-neutral-500 leading-relaxed font-inter line-clamp-2 mb-4">
+                      {blog.excerpt}
+                    </p>
+                  </div>
+
+                  {/* Read Article Bottom Link */}
+                  <div className="pt-4 border-t border-neutral-100 flex items-center justify-between text-[10px] font-extrabold tracking-widest text-minimal-black uppercase">
+                    <span className="inline-flex items-center gap-1.5 group-hover:text-amber-800 transition-colors">
+                      {expandedBlog?.id === blog.id ? 'READING NOW' : 'READ ESSAY'}
+                      <ArrowRight className="w-3.5 h-3.5 text-minimal-black group-hover:translate-x-1 transition-transform" />
+                    </span>
+                    <span className="text-[9px] text-neutral-400 font-semibold">{blog.author}</span>
+                  </div>
+                </article>
+              ))}
+          </div>
+
+        </div>
+      </section>
+
       {/* Stats Section */}
       <section className="relative py-16 bg-white border-b border-neutral-100 z-10">
         <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 grid grid-cols-2 lg:grid-cols-4 gap-12 text-center">
@@ -1312,7 +1734,7 @@ export default function App() {
 
       {/* Video Lightbox Modal */}
       {activeVideoModal && (
-        <div className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-4">
+        <div data-lenis-prevent="true" className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-4">
           <div className="relative w-full max-w-4xl bg-black border border-white/10 shadow-2xl">
             {/* Close button */}
             <button
