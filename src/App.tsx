@@ -21,6 +21,22 @@ import {
   Check
 } from 'lucide-react'
 
+const InstagramIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
+  <svg 
+    className={className} 
+    viewBox="0 0 24 24" 
+    fill="none" 
+    stroke="currentColor" 
+    strokeWidth="2" 
+    strokeLinecap="round" 
+    strokeLinejoin="round"
+  >
+    <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+  </svg>
+)
+
 // Simple cn utility for classnames
 const cn = (...classes: (string | boolean | undefined | null)[]) => {
   return classes.filter(Boolean).join(' ')
@@ -793,8 +809,26 @@ export default function App() {
           </div>
         </div>
 
-        <div className="text-center py-6 text-[10px] tracking-widest text-neutral-400">
+        <div className="text-center py-6 text-[10px] tracking-widest text-neutral-400 border-t border-neutral-100 flex flex-col items-center gap-1.5">
           <span>NAVRASSAA &bull; BESPOKE LUXURY GATHERINGS</span>
+          <div className="flex flex-wrap justify-center items-center gap-3 text-xs font-semibold text-minimal-black mt-1">
+            <a href="mailto:navrassaaevents@gmail.com" className="hover:text-amber-600 transition-colors">
+              navrassaaevents@gmail.com
+            </a>
+            <span>&bull;</span>
+            <a href="tel:9368158321" className="hover:text-amber-600 transition-colors">
+              +91 9368158321
+            </a>
+          </div>
+          <a
+            href="https://www.instagram.com/navrassaaevents?igsi=a29tZW5obThjYTBj&utm_source=qr"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 text-xs font-bold tracking-widest text-minimal-black hover:text-amber-600 transition-colors mt-2 px-3 py-1 bg-neutral-100 border border-neutral-200"
+          >
+            <InstagramIcon className="w-3.5 h-3.5" />
+            @NAVRASSAAEVENTS
+          </a>
         </div>
       </div>
 
@@ -1284,7 +1318,7 @@ export default function App() {
                 
                 {formSubmitted && (
                   <div className="mt-4 text-xs tracking-widest text-minimal-black font-bold animate-pulse text-center">
-                    PRODUCTION ENGINE RUNNING. AN EXPERIENCE DESIGNER WILL CALL YOU IN 12 HOURS.
+                    PRODUCTION ENGINE RUNNING. WE WILL REACH OUT VIA NAVRASSAAEVENTS@GMAIL.COM OR CALL +91 9368158321.
                   </div>
                 )}
               </div>
@@ -1408,12 +1442,18 @@ export default function App() {
                 <Clock className="w-4 h-4 text-minimal-black" />
                 <span>24/7 Service</span>
               </div>
-              <span className="block text-xs text-neutral-400">
-                concierge@navrassaaevents.com
-              </span>
-              <span className="block text-xs text-neutral-400 mt-0.5">
-                +81 (3) 5422 9901
-              </span>
+              <a 
+                href="mailto:navrassaaevents@gmail.com" 
+                className="block text-xs text-neutral-600 hover:text-minimal-black transition-colors font-medium break-all"
+              >
+                navrassaaevents@gmail.com
+              </a>
+              <a 
+                href="tel:9368158321" 
+                className="block text-xs text-neutral-600 hover:text-minimal-black transition-colors font-semibold mt-1"
+              >
+                +91 9368158321
+              </a>
             </div>
 
           </div>
@@ -1426,7 +1466,15 @@ export default function App() {
             </div>
 
             <div className="flex items-center gap-6 text-neutral-400 font-bold">
-              <a href="#" className="hover:text-minimal-black transition-colors text-[10px] tracking-widest uppercase">INSTAGRAM</a>
+              <a 
+                href="https://www.instagram.com/navrassaaevents?igsi=a29tZW5obThjYTBj&utm_source=qr" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="hover:text-minimal-black transition-colors text-[10px] tracking-widest uppercase flex items-center gap-1"
+              >
+                <InstagramIcon className="w-3.5 h-3.5" />
+                INSTAGRAM
+              </a>
               <a href="#" className="hover:text-minimal-black transition-colors text-[10px] tracking-widest uppercase">PINTEREST</a>
               <a href="#" className="hover:text-minimal-black transition-colors text-[10px] tracking-widest uppercase">VIMEO</a>
               <a href="#" className="hover:text-minimal-black transition-colors text-[10px] tracking-widest uppercase">LINKEDIN</a>
