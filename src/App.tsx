@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { motion, MotionValue, useScroll, useTransform, useMotionValueEvent, AnimatePresence } from 'framer-motion'
+import { motion, MotionValue, useScroll, useTransform, useSpring, useMotionValueEvent, AnimatePresence } from 'framer-motion'
 import Lenis from 'lenis'
 import logoImg from './assets/logo_transparent.png'
 import { BlogSection } from './components/BlogSection'
@@ -110,16 +110,18 @@ const stats = [
 ]
 
 const stockImages = [
-  "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=800", // Wedding
-  "https://images.unsplash.com/photo-1511578314322-379afb476865?q=80&w=800", // Corporate
-  "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=800", // Party
-  "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?q=80&w=800", // Birthday
-  "https://images.unsplash.com/photo-1555244162-803834f70033?q=80&w=800", // Dining
-  "https://images.unsplash.com/photo-1506157786151-b8491531f063?q=80&w=800", // Concert
-  "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=800", // Floral
-  "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?q=80&w=800", // Stage
-  "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=800", // Plates
-  "https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=800", // Audience
+  "/showcase_1.jpg",
+  "/showcase_2.jpg",
+  "/showcase_3.jpg",
+  "/showcase_4.jpg",
+  "/showcase_5.jpg",
+  "/showcase_6.jpg",
+  "/showcase_7.jpg",
+  "/showcase_8.jpg",
+  "/showcase_9.jpg",
+  "/showcase_10.JPG",
+  "/showcase_11.JPG",
+  "/showcase_12.JPG",
 ]
 
 const cinematicVideos = [
@@ -151,16 +153,17 @@ type ColumnProps = {
 const Column = ({ images, y }: ColumnProps) => {
   return (
     <motion.div
-      className="relative -top-[45%] flex h-full w-1/4 min-w-[200px] flex-col gap-[2vw] first:top-[-45%] [&:nth-child(2)]:top-[-95%] [&:nth-child(3)]:top-[-45%] [&:nth-child(4)]:top-[-75%]"
+      className="relative -top-[45%] flex h-full w-1/4 min-w-[200px] flex-col gap-[2vw] first:top-[-45%] [&:nth-child(2)]:top-[-95%] [&:nth-child(3)]:top-[-45%] [&:nth-child(4)]:top-[-75%] transform-gpu will-change-transform translate-z-0 backface-hidden"
       style={{ y }}
     >
       {images.map((src, i) => (
-        <div key={i} className="relative h-64 sm:h-72 lg:h-[30vh] w-full overflow-hidden border border-neutral-200 shadow-sm bg-neutral-100">
+        <div key={i} className="relative h-64 sm:h-72 lg:h-[30vh] w-full overflow-hidden border border-neutral-200 shadow-sm bg-neutral-100 transform-gpu">
           <img
             src={src}
             alt="Event archive illustration"
-            className="pointer-events-none w-full h-full object-cover"
+            className="pointer-events-none w-full h-full object-cover select-none"
             loading="lazy"
+            decoding="async"
           />
         </div>
       ))}
@@ -644,11 +647,17 @@ export default function App() {
     return () => window.removeEventListener("resize", resize)
   }, [])
 
+  const smoothGalleryProgress = useSpring(galleryScrollYProgress, {
+    stiffness: 75,
+    damping: 25,
+    restDelta: 0.001
+  })
+
   const { height: windowHeight } = dimension
-  const y = useTransform(galleryScrollYProgress, [0, 1], [0, windowHeight * 2])
-  const y2 = useTransform(galleryScrollYProgress, [0, 1], [0, windowHeight * 3.3])
-  const y3 = useTransform(galleryScrollYProgress, [0, 1], [0, windowHeight * 1.25])
-  const y4 = useTransform(galleryScrollYProgress, [0, 1], [0, windowHeight * 3])
+  const y = useTransform(smoothGalleryProgress, [0, 1], [0, windowHeight * 2])
+  const y2 = useTransform(smoothGalleryProgress, [0, 1], [0, windowHeight * 3.3])
+  const y3 = useTransform(smoothGalleryProgress, [0, 1], [0, windowHeight * 1.25])
+  const y4 = useTransform(smoothGalleryProgress, [0, 1], [0, windowHeight * 3])
 
   // Refs for character reveal scrolling triggers (Skiper31)
   const targetRef = useRef<HTMLDivElement | null>(null)
@@ -1003,7 +1012,7 @@ export default function App() {
             <Column images={[stockImages[0], stockImages[1], stockImages[2]]} y={y} />
             <Column images={[stockImages[3], stockImages[4], stockImages[5]]} y={y2} />
             <Column images={[stockImages[6], stockImages[7], stockImages[8]]} y={y3} />
-            <Column images={[stockImages[9], stockImages[0], stockImages[1]]} y={y4} />
+            <Column images={[stockImages[9], stockImages[10], stockImages[11]]} y={y4} />
           </div>
 
         </div>
