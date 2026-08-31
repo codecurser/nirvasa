@@ -7,6 +7,7 @@ import { BlogDetailPage } from './components/BlogDetailPage'
 import type { BlogPost } from './types/blog'
 import { 
   ArrowRight, 
+  ArrowUpRight,
   Award, 
   Briefcase, 
   Clock, 
@@ -124,24 +125,31 @@ const stockImages = [
   "/showcase_12.JPG",
 ]
 
-const cinematicVideos = [
+interface EventArchiveItem {
+  title: string
+  description: string
+  image: string
+  driveUrl: string
+}
+
+const events: EventArchiveItem[] = [
   {
-    title: 'THE CORPORATE SUMMIT',
-    desc: 'High-end corporate keynotes and spatial architectural designs.',
-    videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-champagne-poured-into-glasses-at-a-party-41712-large.mp4',
-    imageUrl: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=800',
+    title: 'VOILA BIRTHDAY CELEBRATION',
+    description: 'An enchanting birthday celebration crafted with bespoke floral styling, signature backdrops, and ambient lighting.',
+    image: '/showcase_1.jpg',
+    driveUrl: 'https://drive.google.com/drive/folders/1lvE_alBKYJxrQ5SdJFRG2SQaB92F4t60?usp=sharing',
   },
   {
-    title: 'THE COMO UNION',
-    desc: 'Opulent wedding orchestrations and lakefront destination ceremonies.',
-    videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-luxury-wedding-rings-on-table-41716-large.mp4',
-    imageUrl: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=800',
+    title: 'EXCLUSIVE 49TH BIRTHDAY GALA',
+    description: 'A milestone evening designed with opulent yellow canopies, floral geometric pathways, and curated banquet setups.',
+    image: '/showcase_2.jpg',
+    driveUrl: 'https://drive.google.com/drive/folders/1ikVbQsAIrPVaRHc8hCBRMQK9rnuGjV63',
   },
   {
-    title: 'THE FESTIVAL STAGE',
-    desc: 'Monumental stage designs, lighting arrays, and public operations.',
-    videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-crowd-of-people-at-a-concert-41680-large.mp4',
-    imageUrl: 'https://images.unsplash.com/photo-1506157786151-b8491531f063?q=80&w=800',
+    title: 'GRAND CELEBRATION RECEPTION',
+    description: 'Monumental stage architecture, chandelier lighting, and tailored floral walkways for an unforgettable experience.',
+    image: '/showcase_7.jpg',
+    driveUrl: 'https://drive.google.com/drive/folders/1MjuQnT3Av-tBfT9MFJ252UiLDfzDjE4h',
   }
 ]
 
@@ -1095,66 +1103,64 @@ export default function App() {
 
       </section>
 
-      {/* Cinematic Moments Gallery */}
+      {/* Event Archives Gallery */}
       <section id="cinematic" className="relative py-24 sm:py-32 bg-neutral-50/50 border-t border-b border-neutral-100 z-10">
         <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
           
           <div className="max-w-3xl mx-auto text-center mb-16">
             <span className="text-xs font-semibold tracking-[0.25em] text-neutral-400 uppercase mb-3 block">
-              CINEMATIC ARCHIVES
+              EVENT ARCHIVE
             </span>
             <h2 className="font-outfit text-3xl sm:text-4xl font-extrabold tracking-tight text-minimal-black mb-4">
-              Experience the atmosphere.
+              Moments We’ve Brought to Life.
             </h2>
             <p className="text-neutral-500 text-xs sm:text-sm leading-relaxed">
-              Click any archive to launch our high-definition player. Experience the visual weight and sound design of our active gathers.
+              Explore a selection of celebrations, productions, and experiences crafted by our team.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {cinematicVideos.map((item) => (
-              <div
-                key={item.title}
-                onClick={() => setActiveVideoModal(item.videoUrl)}
-                className="group relative overflow-hidden bg-white border border-neutral-200 p-4 hover:border-minimal-black transition-all duration-300 cursor-pointer shadow-sm hover:shadow-md"
+            {events.map((event) => (
+              <a
+                key={event.title}
+                href={event.driveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative flex flex-col justify-between overflow-hidden bg-white border border-neutral-200 p-4 sm:p-5 hover:border-minimal-black transition-all duration-300 cursor-pointer shadow-sm hover:shadow-md hover:-translate-y-1"
               >
-                <div className="w-full h-56 relative overflow-hidden bg-neutral-100 mb-4 border border-neutral-200">
-                  <img
-                    src={item.imageUrl}
-                    alt={item.title}
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    loading="lazy"
-                  />
-                  <video
-                    src={item.videoUrl}
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    ref={(el) => { 
-                      if (el) { 
-                        el.muted = true; 
-                        el.play().catch(() => {}); 
-                      } 
-                    }}
-                    className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                  />
-                  <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-300" />
-                  
-                  {/* Play icon overlay */}
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-md transform group-hover:scale-110 transition-transform duration-350">
-                      <Sparkles className="w-5 h-5 text-minimal-black animate-pulse" />
+                <div>
+                  <div className="w-full h-56 sm:h-60 relative overflow-hidden bg-neutral-100 mb-4 border border-neutral-200">
+                    <img
+                      src={event.image}
+                      alt={event.title}
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition-colors duration-300" />
+                    
+                    {/* Interactive overlay indicator */}
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-md transform group-hover:scale-110 group-hover:bg-minimal-black transition-all duration-300">
+                        <ArrowUpRight className="w-5 h-5 text-minimal-black group-hover:text-white transition-colors duration-300" />
+                      </div>
                     </div>
                   </div>
+
+                  <h3 className="font-outfit text-base sm:text-lg font-bold text-minimal-black uppercase tracking-tight mb-2 group-hover:text-black transition-colors">
+                    {event.title}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-neutral-500 leading-relaxed font-normal mb-5 line-clamp-2">
+                    {event.description}
+                  </p>
                 </div>
-                <h4 className="font-outfit text-md font-bold text-minimal-black mb-1 group-hover:text-black transition-colors">
-                  {item.title}
-                </h4>
-                <p className="text-xs text-neutral-400 leading-relaxed font-semibold">
-                  {item.desc}
-                </p>
-              </div>
+
+                <div className="pt-3 border-t border-neutral-100 flex items-center justify-between">
+                  <span className="inline-flex items-center gap-1.5 text-xs font-bold font-outfit uppercase tracking-widest text-minimal-black group-hover:text-amber-600 transition-colors duration-200">
+                    VIEW EVENT
+                    <ArrowRight className="w-3.5 h-3.5 transform group-hover:translate-x-1.5 transition-transform duration-200" />
+                  </span>
+                </div>
+              </a>
             ))}
           </div>
 
