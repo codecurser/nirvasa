@@ -1394,83 +1394,111 @@ export default function App() {
       )}
 
       {/* Leadership / Founders Section */}
-      <section id="leadership" className="relative py-24 sm:py-32 bg-minimal-black text-white z-10 border-t border-neutral-800">
-        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
+      <section id="leadership" className="relative bg-minimal-black text-white z-10 border-t border-neutral-800">
+        
+        {/* Header Section */}
+        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-24 sm:py-32 pb-16">
+          <div className="max-w-2xl">
+            <span className="text-[10px] font-bold tracking-[0.25em] text-neutral-400 uppercase mb-3 flex items-center gap-2">
+              <Award className="w-4 h-4 text-amber-500" />
+              THE LEADERSHIP
+            </span>
+            <h2 className="font-outfit text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-4">
+              Founded on precise execution.
+            </h2>
+            <p className="text-sm text-neutral-400 leading-relaxed font-inter">
+              Our executive board brings decades of architectural event design and luxury hospitality experience to the forefront of the industry.
+            </p>
+          </div>
+        </div>
+
+        {/* Interactive Expandable Accordion */}
+        <div className="w-full flex flex-col md:flex-row h-[800px] md:h-[600px] lg:h-[700px] border-t border-neutral-800">
           
-          <div className="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-8">
-            <div className="max-w-xl">
-              <span className="text-[10px] font-bold tracking-[0.25em] text-neutral-400 uppercase mb-3 flex items-center gap-2">
-                <Award className="w-4 h-4 text-amber-500" />
-                THE LEADERSHIP
-              </span>
-              <h2 className="font-outfit text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-4">
-                Founded on precise execution.
-              </h2>
-              <p className="text-sm text-neutral-400 leading-relaxed font-inter">
-                Our executive board brings decades of architectural event design and luxury hospitality experience to the forefront of the industry.
-              </p>
+          {/* CEO */}
+          <div className="group relative flex-1 md:hover:flex-[2.5] transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] overflow-hidden cursor-pointer border-b md:border-b-0 md:border-r border-neutral-800 bg-neutral-900">
+            <img 
+              src="/CEO.jpg" 
+              alt="Chief Executive Officer"
+              className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all duration-700"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-100 md:opacity-80 group-hover:opacity-100 transition-opacity duration-700" />
+            
+            {/* Always visible on mobile, reveals on desktop hover */}
+            <div className="absolute bottom-0 left-0 w-full p-6 sm:p-8 lg:p-12 flex flex-col justify-end h-full pointer-events-none">
+              <div className="transform md:translate-y-8 md:group-hover:translate-y-0 transition-transform duration-700 ease-out">
+                <span className="text-[10px] font-bold tracking-[0.25em] text-amber-500 uppercase mb-2 block md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 delay-100">
+                  Chief Executive Officer
+                </span>
+                <h3 className="font-outfit text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight mb-2 sm:mb-4 whitespace-nowrap">
+                  Ms. Manya Gaur
+                </h3>
+                {/* Description scales in */}
+                <div className="grid grid-rows-[1fr] md:grid-rows-[0fr] md:group-hover:grid-rows-[1fr] transition-all duration-700 ease-in-out">
+                  <div className="overflow-hidden">
+                    <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed font-inter max-w-sm opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 delay-200">
+                      Guiding the structural vision and overarching aesthetic of Navrassaa, Manya brings an unparalleled eye for luxury detailing and spatial coordination to every project.
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-12">
+          {/* MD */}
+          <div className="group relative flex-1 md:hover:flex-[2.5] transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] overflow-hidden cursor-pointer border-b md:border-b-0 md:border-r border-neutral-800 bg-neutral-900">
+            <img 
+              src="/Managing_director.jpg" 
+              alt="Managing Director"
+              className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all duration-700"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-100 md:opacity-80 group-hover:opacity-100 transition-opacity duration-700" />
             
-            {/* CEO */}
-            <div className="group cursor-pointer flex flex-col">
-              <div className="w-full aspect-[3/4] overflow-hidden bg-neutral-900 mb-6 border border-neutral-800 relative shadow-2xl">
-                <img 
-                  src="/CEO.jpg" 
-                  alt="Chief Executive Officer" 
-                  className="absolute inset-0 w-full h-full object-cover object-center grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105" 
-                  loading="lazy" 
-                />
-                <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500" />
+            <div className="absolute bottom-0 left-0 w-full p-6 sm:p-8 lg:p-12 flex flex-col justify-end h-full pointer-events-none">
+              <div className="transform md:translate-y-8 md:group-hover:translate-y-0 transition-transform duration-700 ease-out">
+                <span className="text-[10px] font-bold tracking-[0.25em] text-amber-500 uppercase mb-2 block md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 delay-100">
+                  Managing Director
+                </span>
+                <h3 className="font-outfit text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight mb-2 sm:mb-4 whitespace-nowrap">
+                  Mrs. Renu Gaur
+                </h3>
+                <div className="grid grid-rows-[1fr] md:grid-rows-[0fr] md:group-hover:grid-rows-[1fr] transition-all duration-700 ease-in-out">
+                  <div className="overflow-hidden">
+                    <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed font-inter max-w-sm opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 delay-200">
+                      The operational powerhouse behind the studio, Renu ensures that every blueprint is executed with minute-perfect precision and flawless logistical flow.
+                    </p>
+                  </div>
+                </div>
               </div>
-              <h4 className="font-outfit text-xl font-bold uppercase tracking-wide mb-1 group-hover:text-amber-500 transition-colors">
-                Ms. Manya Gaur
-              </h4>
-              <p className="text-xs tracking-widest text-neutral-400 uppercase font-bold">
-                CEO & Founder
-              </p>
             </div>
+          </div>
 
-            {/* MD */}
-            <div className="group cursor-pointer flex flex-col md:mt-16">
-              <div className="w-full aspect-[3/4] overflow-hidden bg-neutral-900 mb-6 border border-neutral-800 relative shadow-2xl">
-                <img 
-                  src="/Managing_director.jpg" 
-                  alt="Managing Director" 
-                  className="absolute inset-0 w-full h-full object-cover object-center grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105" 
-                  loading="lazy" 
-                />
-                <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500" />
+          {/* ED */}
+          <div className="group relative flex-1 md:hover:flex-[2.5] transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] overflow-hidden cursor-pointer bg-neutral-900">
+            <img 
+              src="/Executive_Director.jpg" 
+              alt="Executive Director"
+              className="absolute inset-0 w-full h-full object-cover object-[center_top] opacity-80 group-hover:opacity-100 transition-all duration-700"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-100 md:opacity-80 group-hover:opacity-100 transition-opacity duration-700" />
+            
+            <div className="absolute bottom-0 left-0 w-full p-6 sm:p-8 lg:p-12 flex flex-col justify-end h-full pointer-events-none">
+              <div className="transform md:translate-y-8 md:group-hover:translate-y-0 transition-transform duration-700 ease-out">
+                <span className="text-[10px] font-bold tracking-[0.25em] text-amber-500 uppercase mb-2 block md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 delay-100">
+                  Executive Director
+                </span>
+                <h3 className="font-outfit text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight mb-2 sm:mb-4 whitespace-nowrap">
+                  Mr. Hemant Gaur
+                </h3>
+                <div className="grid grid-rows-[1fr] md:grid-rows-[0fr] md:group-hover:grid-rows-[1fr] transition-all duration-700 ease-in-out">
+                  <div className="overflow-hidden">
+                    <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed font-inter max-w-sm opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 delay-200">
+                      Bridging client relations and grand-scale production, Hemant elevates the standard of luxury hospitality, ensuring the team's conceptual designs exceed expectations.
+                    </p>
+                  </div>
+                </div>
               </div>
-              <h4 className="font-outfit text-xl font-bold uppercase tracking-wide mb-1 group-hover:text-amber-500 transition-colors">
-                Mrs. Renu Gaur
-              </h4>
-              <p className="text-xs tracking-widest text-neutral-400 uppercase font-bold">
-                Managing Director
-              </p>
             </div>
-
-            {/* ED */}
-            <div className="group cursor-pointer flex flex-col">
-              <div className="w-full aspect-[3/4] overflow-hidden bg-neutral-900 mb-6 border border-neutral-800 relative shadow-2xl">
-                <img 
-                  src="/Executive_Director.jpg" 
-                  alt="Executive Director" 
-                  className="absolute inset-0 w-full h-full object-cover object-[center_top] grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105" 
-                  loading="lazy" 
-                />
-                <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500" />
-              </div>
-              <h4 className="font-outfit text-xl font-bold uppercase tracking-wide mb-1 group-hover:text-amber-500 transition-colors">
-                Mr. Hemant Gaur
-              </h4>
-              <p className="text-xs tracking-widest text-neutral-400 uppercase font-bold">
-                Executive Director
-              </p>
-            </div>
-
           </div>
 
         </div>
