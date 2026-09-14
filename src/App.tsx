@@ -1393,6 +1393,89 @@ export default function App() {
         </div>
       )}
 
+      {/* Leadership / Founders Section */}
+      <section id="leadership" className="relative py-24 sm:py-32 bg-minimal-black text-white z-10 border-t border-neutral-800">
+        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
+          
+          <div className="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-8">
+            <div className="max-w-xl">
+              <span className="text-[10px] font-bold tracking-[0.25em] text-neutral-400 uppercase mb-3 flex items-center gap-2">
+                <Award className="w-4 h-4 text-amber-500" />
+                THE LEADERSHIP
+              </span>
+              <h2 className="font-outfit text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-4">
+                Founded on precise execution.
+              </h2>
+              <p className="text-sm text-neutral-400 leading-relaxed font-inter">
+                Our executive board brings decades of architectural event design and luxury hospitality experience to the forefront of the industry.
+              </p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-12">
+            
+            {/* CEO */}
+            <div className="group cursor-pointer flex flex-col">
+              <div className="w-full aspect-[3/4] overflow-hidden bg-neutral-900 mb-6 border border-neutral-800 relative shadow-2xl">
+                <img 
+                  src="/CEO.jpg" 
+                  alt="Chief Executive Officer" 
+                  className="absolute inset-0 w-full h-full object-cover object-center grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105" 
+                  loading="lazy" 
+                />
+                <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500" />
+              </div>
+              <h4 className="font-outfit text-xl font-bold uppercase tracking-wide mb-1 group-hover:text-amber-500 transition-colors">
+                Ms. Manya Gaur
+              </h4>
+              <p className="text-xs tracking-widest text-neutral-400 uppercase font-bold">
+                CEO & Founder
+              </p>
+            </div>
+
+            {/* MD */}
+            <div className="group cursor-pointer flex flex-col md:mt-16">
+              <div className="w-full aspect-[3/4] overflow-hidden bg-neutral-900 mb-6 border border-neutral-800 relative shadow-2xl">
+                <img 
+                  src="/Managing_director.jpg" 
+                  alt="Managing Director" 
+                  className="absolute inset-0 w-full h-full object-cover object-center grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105" 
+                  loading="lazy" 
+                />
+                <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500" />
+              </div>
+              <h4 className="font-outfit text-xl font-bold uppercase tracking-wide mb-1 group-hover:text-amber-500 transition-colors">
+                Mrs. Renu Gaur
+              </h4>
+              <p className="text-xs tracking-widest text-neutral-400 uppercase font-bold">
+                Managing Director
+              </p>
+            </div>
+
+            {/* ED */}
+            <div className="group cursor-pointer flex flex-col">
+              <div className="w-full aspect-[3/4] overflow-hidden bg-neutral-900 mb-6 border border-neutral-800 relative shadow-2xl">
+                <img 
+                  src="/Executive_Director.jpg" 
+                  alt="Executive Director" 
+                  className="absolute inset-0 w-full h-full object-cover object-[center_top] grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105" 
+                  loading="lazy" 
+                />
+                <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500" />
+              </div>
+              <h4 className="font-outfit text-xl font-bold uppercase tracking-wide mb-1 group-hover:text-amber-500 transition-colors">
+                Mr. Hemant Gaur
+              </h4>
+              <p className="text-xs tracking-widest text-neutral-400 uppercase font-bold">
+                Executive Director
+              </p>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
       {/* Footer */}
       <footer className="relative bg-white border-t border-neutral-200 pt-20 pb-10 z-10">
         <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
