@@ -1400,7 +1400,7 @@ export default function App() {
           <div className="grid grid-cols-1 md:grid-cols-12 gap-12 pb-16 border-b border-neutral-100">
             
             {/* Logo details */}
-            <div className="md:col-span-4 flex flex-col items-start">
+            <div className="md:col-span-6 lg:col-span-7 flex flex-col items-start pr-12">
               <img 
                 src={logoImg} 
                 alt="Navrassaa Events Logo" 
@@ -1415,7 +1415,7 @@ export default function App() {
             </div>
 
             {/* Links */}
-            <div className="md:col-span-3">
+            <div className="md:col-span-3 lg:col-span-2">
               <h5 className="text-[10px] font-bold tracking-widest text-minimal-black uppercase mb-4">
                 THE STUDIO
               </h5>
@@ -1427,29 +1427,8 @@ export default function App() {
               </ul>
             </div>
 
-            {/* Address */}
-            <div className="md:col-span-3">
-              <h5 className="text-[10px] font-bold tracking-widest text-minimal-black uppercase mb-4">
-                OFFICES
-              </h5>
-              <ul className="space-y-4 text-xs text-neutral-500 leading-relaxed font-semibold">
-                <li className="flex gap-2">
-                  <MapPin className="w-4 h-4 text-minimal-black shrink-0" />
-                  <span>TOKYO &bull; Shibuya District, Suite 4A</span>
-                </li>
-                <li className="flex gap-2">
-                  <MapPin className="w-4 h-4 text-minimal-black shrink-0" />
-                  <span>PARIS &bull; 8ème Arrondissement, Champs-Élysées 402</span>
-                </li>
-                <li className="flex gap-2">
-                  <MapPin className="w-4 h-4 text-minimal-black shrink-0" />
-                  <span>DELHI &bull; Mehrauli Heritage Complex, The Arches Gallery</span>
-                </li>
-              </ul>
-            </div>
-
             {/* Contact details */}
-            <div className="md:col-span-2">
+            <div className="md:col-span-3 lg:col-span-3">
               <h5 className="text-[10px] font-bold tracking-widest text-minimal-black uppercase mb-4">
                 CONTACT
               </h5>
