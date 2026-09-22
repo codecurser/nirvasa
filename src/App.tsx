@@ -156,12 +156,13 @@ const events: EventArchiveItem[] = [
 type ColumnProps = {
   images: string[];
   y: MotionValue<number>;
+  className?: string;
 }
 
-const Column = ({ images, y }: ColumnProps) => {
+const Column = ({ images, y, className }: ColumnProps) => {
   return (
     <motion.div
-      className="relative -top-[45%] flex h-full w-1/4 min-w-[200px] flex-col gap-[2vw] first:top-[-45%] [&:nth-child(2)]:top-[-95%] [&:nth-child(3)]:top-[-45%] [&:nth-child(4)]:top-[-75%] transform-gpu will-change-transform translate-z-0 backface-hidden"
+      className={cn("relative -top-[45%] flex h-full w-1/2 md:w-1/4 min-w-[150px] sm:min-w-[200px] flex-col gap-[2vw] first:top-[-45%] [&:nth-child(2)]:top-[-95%] [&:nth-child(3)]:top-[-45%] [&:nth-child(4)]:top-[-75%] transform-gpu will-change-transform translate-z-0 backface-hidden", className)}
       style={{ y }}
     >
       {images.map((src, i) => (
@@ -1019,8 +1020,8 @@ export default function App() {
           >
             <Column images={[stockImages[0], stockImages[1], stockImages[2]]} y={y} />
             <Column images={[stockImages[3], stockImages[4], stockImages[5]]} y={y2} />
-            <Column images={[stockImages[6], stockImages[7], stockImages[8]]} y={y3} />
-            <Column images={[stockImages[9], stockImages[10], stockImages[11]]} y={y4} />
+            <Column className="hidden md:flex" images={[stockImages[6], stockImages[7], stockImages[8]]} y={y3} />
+            <Column className="hidden md:flex" images={[stockImages[9], stockImages[10], stockImages[11]]} y={y4} />
           </div>
 
         </div>
@@ -1570,7 +1571,7 @@ export default function App() {
               <span>&copy; {new Date().getFullYear()} NAVRASSAA. ALL RIGHTS RESERVED. &bull; MINIMALIST PROFESSIONAL GATHERINGS.</span>
             </div>
 
-            <div className="flex items-center gap-6 text-neutral-400 font-bold">
+            <div className="flex flex-wrap justify-center items-center gap-4 sm:gap-6 text-neutral-400 font-bold">
               <a 
                 href="https://www.instagram.com/navrassaaevents?igsi=a29tZW5obThjYTBj&utm_source=qr" 
                 target="_blank" 
