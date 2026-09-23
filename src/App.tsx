@@ -103,6 +103,69 @@ const services = [
   },
 ]
 
+const typewriterWords = [
+  { prefix: 'Welcome to', highlight: 'NAVRASSAA' },
+  { prefix: 'Curating', highlight: 'Palace Weddings' },
+  { prefix: 'Executing', highlight: 'Corporate Summits' },
+  { prefix: 'Engineering', highlight: 'Immersive Staging' },
+  { prefix: 'Delivering', highlight: 'VIP Hospitality' },
+]
+
+const heroPillars = [
+  {
+    id: 'corporate',
+    tag: 'EXECUTIVE PRODUCTION',
+    title: 'Corporate Summits & Galas',
+    shortTitle: 'Corporate Events',
+    icon: Briefcase,
+    color: 'text-purple-600',
+    bgColor: 'bg-purple-50',
+    borderColor: 'border-purple-200',
+    accentGrad: 'from-purple-600 to-indigo-600',
+    desc: 'Bespoke corporate authority, symmetrical stage architecture, cutting-edge production & executive networking atmospheres.',
+    stats: '150+ Summits',
+  },
+  {
+    id: 'weddings',
+    tag: 'ROYAL CELEBRATIONS',
+    title: 'Palace & Destination Weddings',
+    shortTitle: 'Palace Weddings',
+    icon: Heart,
+    color: 'text-rose-600',
+    bgColor: 'bg-rose-50',
+    borderColor: 'border-rose-200',
+    accentGrad: 'from-rose-600 to-pink-600',
+    desc: 'Monumental royal heritage mandates, coastal mandap geometry, opulent floral grids, and curated bridal sanctuary setups.',
+    stats: '200+ Nuptials',
+  },
+  {
+    id: 'production',
+    tag: 'SPATIAL AUDIO & VISUALS',
+    title: 'Immersive Stage & Lighting',
+    shortTitle: 'Production & Lighting',
+    icon: Sparkles,
+    color: 'text-amber-600',
+    bgColor: 'bg-amber-50',
+    borderColor: 'border-amber-200',
+    accentGrad: 'from-amber-500 to-orange-600',
+    desc: 'Precision laser mapping, 3D lighting arrays, sound path acoustic engineering, and structural set builds.',
+    stats: '500k+ Attendees',
+  },
+  {
+    id: 'hospitality',
+    tag: 'VIP PROTOCOL & DINING',
+    title: 'Luxury Concierge Hospitality',
+    shortTitle: 'Luxury Hospitality',
+    icon: Crown,
+    color: 'text-blue-600',
+    bgColor: 'bg-blue-50',
+    borderColor: 'border-blue-200',
+    accentGrad: 'from-blue-600 to-cyan-600',
+    desc: 'White-glove arrival protocol, celebrity handling, Michelin-inspired catering curation, and 24/7 guest relations.',
+    stats: '99.4% Flawless',
+  },
+]
+
 const stats = [
   { value: '450+', label: 'Events Curated' },
   { value: '98%', label: 'Flawless Rating' },
@@ -303,6 +366,66 @@ const CharacterV3 = ({
     >
       <Icon className="w-6 h-6" />
     </motion.div>
+  )
+}
+
+function TypewriterText({
+  words,
+  typingSpeed = 95,
+  deletingSpeed = 50,
+  pauseDuration = 2200,
+}: {
+  words: { prefix?: string; highlight: string }[]
+  typingSpeed?: number
+  deletingSpeed?: number
+  pauseDuration?: number
+}) {
+  const [wordIndex, setWordIndex] = useState(0)
+  const [currentText, setCurrentText] = useState('')
+  const [isDeleting, setIsDeleting] = useState(false)
+
+  const currentWord = words[wordIndex]
+  const fullHighlight = currentWord.highlight
+
+  useEffect(() => {
+    let timer: any
+
+    if (isDeleting) {
+      if (currentText.length > 0) {
+        timer = setTimeout(() => {
+          setCurrentText((prev) => prev.slice(0, -1))
+        }, deletingSpeed)
+      } else {
+        setIsDeleting(false)
+        setWordIndex((prev) => (prev + 1) % words.length)
+      }
+    } else {
+      if (currentText.length < fullHighlight.length) {
+        timer = setTimeout(() => {
+          setCurrentText(fullHighlight.slice(0, currentText.length + 1))
+        }, typingSpeed)
+      } else {
+        timer = setTimeout(() => {
+          setIsDeleting(true)
+        }, pauseDuration)
+      }
+    }
+
+    return () => clearTimeout(timer)
+  }, [currentText, isDeleting, wordIndex, words, fullHighlight, typingSpeed, deletingSpeed, pauseDuration])
+
+  return (
+    <h1 className="font-outfit text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.15] text-center min-h-[1.25em] flex items-center justify-center flex-wrap">
+      {currentWord.prefix && (
+        <span className="text-minimal-black mr-2.5 sm:mr-3.5">
+          {currentWord.prefix}
+        </span>
+      )}
+      <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-600 via-yellow-600 to-amber-700">
+        {currentText}
+      </span>
+      <span className="text-amber-500 font-light font-mono animate-pulse ml-1 inline-block">|</span>
+    </h1>
   )
 }
 
@@ -847,16 +970,18 @@ export default function App() {
         </div>
       </div>
 
-      {/* Hero Section - Pure Unobstructed Full-Bleed Video Background */}
+      {/* Hero Section - Pure Unobstructed Full-Bleed Video Background with Integrated Bottom Curve & Typography */}
       <section
         id="hero"
-        style={{ opacity: heroOpacity, transform: `scale(${heroScale})` }}
-        className="relative w-full h-[50vh] sm:h-[60vh] lg:h-[65vh] flex flex-col justify-end items-center text-center px-6 pb-16 z-10 preserve-3d overflow-hidden"
+        className="relative w-full flex flex-col justify-end items-center text-center z-10 preserve-3d overflow-hidden bg-white"
       >
-        {/* Crystal Clear full-bleed video background */}
-        <div className="absolute inset-0 w-full h-full overflow-hidden z-0">
+        {/* Crystal Clear full-bleed video background layer */}
+        <div
+          style={{ opacity: heroOpacity, transform: `scale(${heroScale})` }}
+          className="relative w-full h-[54vh] sm:h-[64vh] lg:h-[72vh] overflow-hidden z-0 transition-transform duration-100"
+        >
           <video
-            src="/genrate_an_video_for_the_hero.mp4"
+            src="/hero_video.mp4"
             poster="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=1500"
             autoPlay
             muted
@@ -870,67 +995,101 @@ export default function App() {
             }}
             className="w-full h-full object-cover filter brightness-100 contrast-100"
           />
+
+          {/* Bottom Curved Shape Divider (matching the upward arch design) */}
+          <div className="absolute bottom-0 left-0 right-0 w-full overflow-hidden leading-none z-10 pointer-events-none">
+            <svg
+              viewBox="0 0 1440 120"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className="relative block w-full h-14 sm:h-22 lg:h-32 text-white"
+              preserveAspectRatio="none"
+            >
+              <path
+                d="M0,70 C420,0 1020,0 1440,70 L1440,120 L0,120 Z"
+                fill="#ffffff"
+              />
+            </svg>
+          </div>
+        </div>
+
+        {/* Integrated Hero Typography Area (Directly in the curve transition area, matching whole site design) */}
+        <div className="relative z-20 w-full max-w-5xl mx-auto px-6 sm:px-10 -mt-6 sm:-mt-10 lg:-mt-14 pb-4 sm:pb-6 flex flex-col items-center justify-center bg-white">
+
+          {/* Dynamic Typewriter Headline */}
+          <TypewriterText words={typewriterWords} />
+
+          {/* Subtitle matching typography rhythm */}
+          <p className="text-xs sm:text-sm lg:text-base text-neutral-500 max-w-2xl mx-auto font-inter mt-2.5 sm:mt-3.5 leading-relaxed text-center font-medium">
+            India's premier luxury event management, wedding curation & architectural staging studio
+          </p>
+
+        </div>
+
+        {/* Events We Cover Highlight Strip - Shifted Upward */}
+        <div className="w-full border-t border-b border-neutral-200/80 bg-neutral-50/70 py-2.5 sm:py-3.5 overflow-hidden relative select-none">
+          <div className="flex w-max animate-marquee space-x-8 sm:space-x-12 text-[10px] sm:text-xs font-bold tracking-[0.22em] uppercase text-neutral-600 font-outfit">
+            <span className="flex items-center gap-2 hover:text-amber-600 transition-colors">
+              <span className="text-amber-500 text-sm">✦</span>
+              <span>Corporate Events & Conferences</span>
+            </span>
+            <span className="flex items-center gap-2 hover:text-amber-600 transition-colors">
+              <span className="text-amber-500 text-sm">✦</span>
+              <span>Palace & Destination Weddings</span>
+            </span>
+            <span className="flex items-center gap-2 hover:text-amber-600 transition-colors">
+              <span className="text-amber-500 text-sm">✦</span>
+              <span>Theme-Based Parties & Galas</span>
+            </span>
+            <span className="flex items-center gap-2 hover:text-amber-600 transition-colors">
+              <span className="text-amber-500 text-sm">✦</span>
+              <span>Milestone Birthday Decors</span>
+            </span>
+            <span className="flex items-center gap-2 hover:text-amber-600 transition-colors">
+              <span className="text-amber-500 text-sm">✦</span>
+              <span>Fine Dining & Gourmet Catering</span>
+            </span>
+            <span className="flex items-center gap-2 hover:text-amber-600 transition-colors">
+              <span className="text-amber-500 text-sm">✦</span>
+              <span>Social & Cultural Celebrations</span>
+            </span>
+            <span className="flex items-center gap-2 hover:text-amber-600 transition-colors">
+              <span className="text-amber-500 text-sm">✦</span>
+              <span>Immersive Stage & Lighting</span>
+            </span>
+
+            {/* Loop copy for continuous infinite stream */}
+            <span className="flex items-center gap-2 hover:text-amber-600 transition-colors">
+              <span className="text-amber-500 text-sm">✦</span>
+              <span>Corporate Events & Conferences</span>
+            </span>
+            <span className="flex items-center gap-2 hover:text-amber-600 transition-colors">
+              <span className="text-amber-500 text-sm">✦</span>
+              <span>Palace & Destination Weddings</span>
+            </span>
+            <span className="flex items-center gap-2 hover:text-amber-600 transition-colors">
+              <span className="text-amber-500 text-sm">✦</span>
+              <span>Theme-Based Parties & Galas</span>
+            </span>
+            <span className="flex items-center gap-2 hover:text-amber-600 transition-colors">
+              <span className="text-amber-500 text-sm">✦</span>
+              <span>Milestone Birthday Decors</span>
+            </span>
+            <span className="flex items-center gap-2 hover:text-amber-600 transition-colors">
+              <span className="text-amber-500 text-sm">✦</span>
+              <span>Fine Dining & Gourmet Catering</span>
+            </span>
+            <span className="flex items-center gap-2 hover:text-amber-600 transition-colors">
+              <span className="text-amber-500 text-sm">✦</span>
+              <span>Social & Cultural Celebrations</span>
+            </span>
+            <span className="flex items-center gap-2 hover:text-amber-600 transition-colors">
+              <span className="text-amber-500 text-sm">✦</span>
+              <span>Immersive Stage & Lighting</span>
+            </span>
+          </div>
         </div>
       </section>
-
-      {/* 4 Overlapping Feature Cards - Placed at the bottom edge of Hero Video */}
-      <div className="relative -mt-16 sm:-mt-20 z-30 max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-
-          {/* Feature Card 1 */}
-          <a href="#services" className="group bg-white rounded-lg border border-neutral-200/80 p-6 flex flex-col items-center text-center shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
-            <div className="w-14 h-14 rounded-2xl bg-purple-50 text-purple-600 flex items-center justify-center mb-4 group-hover:bg-purple-600 group-hover:text-white transition-colors duration-300 shadow-sm">
-              <Briefcase className="w-7 h-7" />
-            </div>
-            <h4 className="font-outfit text-base font-extrabold text-neutral-900 uppercase tracking-wide group-hover:text-purple-600 transition-colors">
-              CORPORATE EVENTS
-            </h4>
-            <p className="text-xs text-neutral-500 mt-2 font-inter leading-relaxed">
-              Summits, keynotes & corporate galas executed with authority.
-            </p>
-          </a>
-
-          {/* Feature Card 2 */}
-          <a href="#services" className="group bg-white rounded-lg border border-neutral-200/80 p-6 flex flex-col items-center text-center shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
-            <div className="w-14 h-14 rounded-2xl bg-pink-50 text-pink-600 flex items-center justify-center mb-4 group-hover:bg-pink-600 group-hover:text-white transition-colors duration-300 shadow-sm">
-              <Heart className="w-7 h-7" />
-            </div>
-            <h4 className="font-outfit text-base font-extrabold text-neutral-900 uppercase tracking-wide group-hover:text-pink-600 transition-colors">
-              PALACE WEDDINGS
-            </h4>
-            <p className="text-xs text-neutral-500 mt-2 font-inter leading-relaxed">
-              Royal heritage celebrations & coastal destination mandaps.
-            </p>
-          </a>
-
-          {/* Feature Card 3 */}
-          <a href="#services" className="group bg-white rounded-lg border border-neutral-200/80 p-6 flex flex-col items-center text-center shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
-            <div className="w-14 h-14 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center mb-4 group-hover:bg-amber-600 group-hover:text-white transition-colors duration-300 shadow-sm">
-              <Sparkles className="w-7 h-7" />
-            </div>
-            <h4 className="font-outfit text-base font-extrabold text-neutral-900 uppercase tracking-wide group-hover:text-amber-600 transition-colors">
-              PRODUCTION & LIGHTING
-            </h4>
-            <p className="text-xs text-neutral-500 mt-2 font-inter leading-relaxed">
-              Immersive stage design, spatial audio & visual architecture.
-            </p>
-          </a>
-
-          {/* Feature Card 4 */}
-          <a href="#services" className="group bg-white rounded-lg border border-neutral-200/80 p-6 flex flex-col items-center text-center shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
-            <div className="w-14 h-14 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center mb-4 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300 shadow-sm">
-              <Crown className="w-7 h-7" />
-            </div>
-            <h4 className="font-outfit text-base font-extrabold text-neutral-900 uppercase tracking-wide group-hover:text-blue-600 transition-colors">
-              LUXURY HOSPITALITY
-            </h4>
-            <p className="text-xs text-neutral-500 mt-2 font-inter leading-relaxed">
-              Seamless guest relations, concierge & VIP arrival experiences.
-            </p>
-          </a>
-
-        </div>
-      </div>
 
       {/* The Studio / About Section */}
       <section
