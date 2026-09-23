@@ -5,31 +5,31 @@ import logoImg from './assets/logo_transparent.png'
 import { BlogSection } from './components/BlogSection'
 import { BlogDetailPage } from './components/BlogDetailPage'
 import type { BlogPost } from './types/blog'
-import { 
-  ArrowRight, 
+import {
+  ArrowRight,
   ArrowUpRight,
-  Award, 
-  Briefcase, 
-  Clock, 
-  Compass, 
-  Crown, 
-  Heart, 
-  MapPin, 
-  Sparkles, 
-  Utensils, 
-  X, 
+  Award,
+  Briefcase,
+  Clock,
+  Compass,
+  Crown,
+  Heart,
+  MapPin,
+  Sparkles,
+  Utensils,
+  X,
   MessageSquare,
   Check
 } from 'lucide-react'
 
 const InstagramIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
-  <svg 
-    className={className} 
-    viewBox="0 0 24 24" 
-    fill="none" 
-    stroke="currentColor" 
-    strokeWidth="2" 
-    strokeLinecap="round" 
+  <svg
+    className={className}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
     strokeLinejoin="round"
   >
     <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
@@ -306,10 +306,10 @@ const CharacterV3 = ({
   )
 }
 
-function ServicesSection({ 
-  setSelectedService 
-}: { 
-  setSelectedService: (title: string) => void 
+function ServicesSection({
+  setSelectedService
+}: {
+  setSelectedService: (title: string) => void
 }) {
   const containerRef = useRef<HTMLDivElement>(null)
   const mobileScrollRef = useRef<HTMLDivElement>(null)
@@ -343,14 +343,14 @@ function ServicesSection({
   }
 
   return (
-    <section 
-      id="services" 
-      ref={containerRef} 
+    <section
+      id="services"
+      ref={containerRef}
       className="relative w-full bg-white z-20 md:h-[600vh]"
     >
       {/* DESKTOP & TABLET VIEW (md and up): Pinned Sticky Horizontal Scroll */}
       <div className="hidden md:flex sticky top-0 w-full h-screen overflow-hidden flex-col justify-between">
-        
+
         {/* Header Progress indicator */}
         <div className="w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 pt-6 md:pt-10 flex justify-between items-end border-b border-neutral-100 pb-4 shrink-0 z-30">
           <div>
@@ -366,11 +366,11 @@ function ServicesSection({
             <span className="hidden sm:inline">&bull;</span>
             <div className="flex items-center gap-1.5 text-minimal-black bg-neutral-100/90 backdrop-blur-sm px-3.5 py-1.5 border border-neutral-200/80 font-mono text-sm font-bold shadow-xs">
               <AnimatePresence mode="wait">
-                <motion.span 
-                  key={activeServiceIndex} 
-                  initial={{ opacity: 0, y: -6 }} 
-                  animate={{ opacity: 1, y: 0 }} 
-                  exit={{ opacity: 0, y: 6 }} 
+                <motion.span
+                  key={activeServiceIndex}
+                  initial={{ opacity: 0, y: -6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 6 }}
                   transition={{ duration: 0.15 }}
                   className="inline-block min-w-[2ch] text-center"
                 >
@@ -385,18 +385,18 @@ function ServicesSection({
 
         {/* Horizontal Slide Container Track */}
         <div className="flex-1 flex items-center overflow-hidden relative">
-          <motion.div 
+          <motion.div
             style={{ x, width: '600%' }}
             className="flex flex-row flex-nowrap h-[72vh] shrink-0"
           >
             {services.map((service, index) => (
-              <div 
-                key={service.title} 
+              <div
+                key={service.title}
                 className="w-1/6 h-full shrink-0 flex flex-col lg:flex-row items-center px-6 sm:px-10 lg:px-16 max-w-7xl mx-auto gap-8 lg:gap-16"
               >
                 {/* Left Column: Image base layer + Video hover preview */}
                 <div className="w-full lg:w-1/2 h-[42%] lg:h-[88%] relative overflow-hidden border border-neutral-200 shadow-md group cursor-pointer">
-                  
+
                   <img
                     src={service.imageUrl}
                     alt={service.title}
@@ -410,17 +410,17 @@ function ServicesSection({
                     muted
                     loop
                     playsInline
-                    ref={(el) => { 
-                      if (el) { 
-                        el.muted = true; 
-                        el.play().catch(() => {}); 
-                      } 
+                    ref={(el) => {
+                      if (el) {
+                        el.muted = true;
+                        el.play().catch(() => { });
+                      }
                     }}
                     className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                   />
 
                   <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent pointer-events-none" />
-                  
+
                   <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm border border-neutral-200 px-3 py-1 text-[8px] font-bold tracking-widest uppercase text-minimal-black group-hover:bg-minimal-black group-hover:text-white transition-colors duration-300">
                     HOVER TO WATCH PREVIEW
                   </div>
@@ -475,7 +475,7 @@ function ServicesSection({
 
         {/* Visual bottom progress bar indicator */}
         <div className="w-full h-[4px] bg-neutral-100 mt-auto shrink-0 z-30 overflow-hidden">
-          <motion.div 
+          <motion.div
             style={{ width: progressBarWidth }}
             className="h-full bg-minimal-black"
           />
@@ -502,22 +502,22 @@ function ServicesSection({
         </div>
 
         {/* Swipeable Carousel Track */}
-        <div 
+        <div
           ref={mobileScrollRef}
           onScroll={handleMobileScroll}
           className="flex gap-4 overflow-x-auto snap-x snap-mandatory no-scrollbar pb-4 px-2"
         >
           {services.map((service, index) => (
-            <div 
+            <div
               key={service.title}
               className="snap-center shrink-0 w-[88vw] max-w-sm bg-white border border-neutral-200 p-5 flex flex-col justify-between shadow-xs"
             >
               <div>
                 <div className="relative h-48 w-full overflow-hidden border border-neutral-200 mb-5 group">
-                  <img 
-                    src={service.imageUrl} 
-                    alt={service.title} 
-                    className="w-full h-full object-cover" 
+                  <img
+                    src={service.imageUrl}
+                    alt={service.title}
+                    className="w-full h-full object-cover"
                   />
                   <span className="absolute bottom-2 left-4 font-outfit text-4xl font-black text-white/30">
                     0{index + 1}
@@ -593,7 +593,7 @@ export default function App() {
   const [formSubmitted, setFormSubmitted] = useState<boolean>(false)
   const [activeVideoModal, setActiveVideoModal] = useState<string | null>(null)
   const [selectedBlogPost, setSelectedBlogPost] = useState<BlogPost | null>(null)
-  
+
   // Track scroll position for header animations
   useEffect(() => {
     const handleScroll = () => {
@@ -717,9 +717,9 @@ export default function App() {
 
   return (
     <div className="relative bg-white text-minimal-black w-full min-h-screen font-inter select-none bg-grid-pattern">
-      
+
       {/* Scroll Progress Bar */}
-      <div 
+      <div
         style={{ width: `${Math.min((scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100, 100)}%` }}
         className="fixed top-0 left-0 h-[2px] bg-minimal-black z-50 transition-all duration-100"
       />
@@ -727,12 +727,12 @@ export default function App() {
       {/* Header / Navbar - Merged directly over Hero Video */}
       <header className="absolute top-0 left-0 right-0 z-40 bg-gradient-to-b from-black/80 via-black/40 to-transparent text-white transition-all duration-300">
         <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-5 flex items-center justify-between">
-          
+
           {/* Logo image */}
           <a href="#" className="flex items-center gap-3 group py-1">
-            <img 
-              src={logoImg} 
-              alt="Navrassaa Events Logo" 
+            <img
+              src={logoImg}
+              alt="Navrassaa Events Logo"
               className="h-10 sm:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105 filter drop-shadow-[0_2px_12px_rgba(255,255,255,0.45)]"
             />
           </a>
@@ -776,9 +776,8 @@ export default function App() {
 
       {/* Mobile Menu Overlay */}
       <div
-        className={`fixed inset-0 z-50 bg-white/98 backdrop-blur-md flex flex-col justify-between transition-all duration-500 ${
-          menuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
-        }`}
+        className={`fixed inset-0 z-50 bg-white/98 backdrop-blur-md flex flex-col justify-between transition-all duration-500 ${menuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
+          }`}
       >
         <div className="px-6 py-5 flex items-center justify-between border-b border-neutral-100">
           <a href="#" onClick={() => setMenuOpen(false)} className="flex items-center gap-2">
@@ -800,9 +799,8 @@ export default function App() {
                 key={link.name}
                 href={link.href}
                 onClick={() => setMenuOpen(false)}
-                className={`font-outfit text-2xl text-minimal-black uppercase tracking-widest hover:text-amber-600 transition-all duration-500 transform ${
-                  menuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-                }`}
+                className={`font-outfit text-2xl text-minimal-black uppercase tracking-widest hover:text-amber-600 transition-all duration-500 transform ${menuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+                  }`}
                 style={{ transitionDelay: `${i * 80 + 100}ms` }}
               >
                 {link.name}
@@ -811,9 +809,8 @@ export default function App() {
           </nav>
 
           <div
-            className={`transition-all duration-500 transform mt-8 ${
-              menuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-            }`}
+            className={`transition-all duration-500 transform mt-8 ${menuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+              }`}
             style={{ transitionDelay: '420ms' }}
           >
             <a
@@ -851,7 +848,7 @@ export default function App() {
       </div>
 
       {/* Hero Section - Pure Unobstructed Full-Bleed Video Background */}
-      <section 
+      <section
         id="hero"
         style={{ opacity: heroOpacity, transform: `scale(${heroScale})` }}
         className="relative w-full h-[50vh] sm:h-[60vh] lg:h-[65vh] flex flex-col justify-end items-center text-center px-6 pb-16 z-10 preserve-3d overflow-hidden"
@@ -865,11 +862,11 @@ export default function App() {
             muted
             loop
             playsInline
-            ref={(el) => { 
-              if (el) { 
-                el.muted = true; 
-                el.play().catch((err) => console.log('Autoplay blocked:', err)); 
-              } 
+            ref={(el) => {
+              if (el) {
+                el.muted = true;
+                el.play().catch((err) => console.log('Autoplay blocked:', err));
+              }
             }}
             className="w-full h-full object-cover filter brightness-100 contrast-100"
           />
@@ -879,7 +876,7 @@ export default function App() {
       {/* 4 Overlapping Feature Cards - Placed at the bottom edge of Hero Video */}
       <div className="relative -mt-16 sm:-mt-20 z-30 max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          
+
           {/* Feature Card 1 */}
           <a href="#services" className="group bg-white rounded-lg border border-neutral-200/80 p-6 flex flex-col items-center text-center shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
             <div className="w-14 h-14 rounded-2xl bg-purple-50 text-purple-600 flex items-center justify-center mb-4 group-hover:bg-purple-600 group-hover:text-white transition-colors duration-300 shadow-sm">
@@ -936,18 +933,18 @@ export default function App() {
       </div>
 
       {/* The Studio / About Section */}
-      <section 
-        id="about" 
+      <section
+        id="about"
         className="relative py-24 sm:py-32 border-b border-neutral-200/60 bg-white z-10"
       >
         <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
-          
+
           {/* Visual Grid (Left) */}
           <div className="lg:col-span-5 relative flex justify-center items-center">
             {/* Outline box frames */}
             <div className="absolute w-80 h-80 border border-neutral-200 rotate-45 pointer-events-none" />
             <div className="absolute w-80 h-80 border border-neutral-100 -rotate-12 pointer-events-none" />
-            
+
             {/* Center minimalist card */}
             <div className="relative bg-white border border-neutral-200 rounded-none p-8 max-w-sm w-full z-10 shadow-lg hover:-translate-y-1 transition-transform duration-500">
               <Award className="w-10 h-10 text-minimal-black mb-6" />
@@ -955,7 +952,7 @@ export default function App() {
               <p className="text-xs text-neutral-500 leading-relaxed mb-6">
                 We believe visual restraint projects higher quality than ornament. Our setups focus on symmetry, lighting path coordinates, and spatial order.
               </p>
-              
+
               <div className="flex items-center gap-3 pt-4 border-t border-neutral-100 text-[9px] text-neutral-400 tracking-widest uppercase font-bold">
                 <span>ESTABLISHED 2018</span>
                 <span>&bull;</span>
@@ -1000,7 +997,7 @@ export default function App() {
       {/* Skiper30 - Showcase vertical multi-column parallax photo gallery */}
       <section id="works" className="relative py-24 sm:py-32 bg-white border-t border-b border-neutral-100 overflow-hidden z-10">
         <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
-          
+
           <div className="max-w-3xl mx-auto text-center mb-16">
             <span className="text-xs font-semibold tracking-[0.25em] text-neutral-400 uppercase mb-3 block">
               PORTFOLIO ARCHIVES
@@ -1028,13 +1025,13 @@ export default function App() {
       </section>
 
       {/* Curated Blog Section */}
-      <BlogSection 
-        onSelectPost={(post) => setSelectedBlogPost(post)} 
+      <BlogSection
+        onSelectPost={(post) => setSelectedBlogPost(post)}
       />
 
       {/* Skiper31 - Transition folds right before the booking portal */}
       <section className="relative w-full bg-[#f5f4f3] border-t border-b border-neutral-200 py-24 z-10">
-        
+
         {/* Character reveal splitting target 1 */}
         <div
           ref={targetRef}
@@ -1107,7 +1104,7 @@ export default function App() {
       {/* Event Archives Gallery */}
       <section id="cinematic" className="relative py-24 sm:py-32 bg-neutral-50/50 border-t border-b border-neutral-100 z-10">
         <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
-          
+
           <div className="max-w-3xl mx-auto text-center mb-16">
             <span className="text-xs font-semibold tracking-[0.25em] text-neutral-400 uppercase mb-3 block">
               EVENT ARCHIVE
@@ -1138,7 +1135,7 @@ export default function App() {
                       loading="lazy"
                     />
                     <div className="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition-colors duration-300" />
-                    
+
                     {/* Interactive overlay indicator */}
                     <div className="absolute inset-0 flex items-center justify-center">
                       <div className="w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-md transform group-hover:scale-110 group-hover:bg-minimal-black transition-all duration-300">
@@ -1187,7 +1184,7 @@ export default function App() {
       {/* Booking Form Design Portal */}
       <section id="book" className="relative py-24 sm:py-32 bg-white z-10">
         <div className="max-w-4xl mx-auto px-6 sm:px-10">
-          
+
           <div className="text-center max-w-2xl mx-auto mb-16">
             <span className="text-xs font-semibold tracking-[0.25em] text-neutral-400 uppercase mb-3 block">
               DESIGN PORTAL
@@ -1202,9 +1199,9 @@ export default function App() {
 
           {/* Minimal Form */}
           <div className="border border-neutral-200 bg-white p-8 sm:p-12 shadow-sm">
-            
+
             <form onSubmit={handleBookingSubmit} className="space-y-8">
-              
+
               {/* Event selection button grid */}
               <div>
                 <label className="block text-[10px] font-bold tracking-widest text-neutral-400 uppercase mb-4">
@@ -1216,11 +1213,10 @@ export default function App() {
                       key={serv.title}
                       type="button"
                       onClick={() => setSelectedService(serv.title)}
-                      className={`px-4 py-2.5 border text-[11px] font-bold tracking-wider text-center transition-all duration-300 ${
-                        selectedService === serv.title
+                      className={`px-4 py-2.5 border text-[11px] font-bold tracking-wider text-center transition-all duration-300 ${selectedService === serv.title
                           ? 'border-minimal-black bg-minimal-black text-white'
                           : 'border-neutral-200 bg-white text-neutral-500 hover:border-neutral-400 hover:text-minimal-black'
-                      }`}
+                        }`}
                     >
                       {serv.title}
                     </button>
@@ -1230,7 +1226,7 @@ export default function App() {
 
               {/* Settings parameters */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                
+
                 {/* Location buttons */}
                 <div>
                   <label className="block text-[10px] font-bold tracking-widest text-neutral-400 uppercase mb-3">
@@ -1242,11 +1238,10 @@ export default function App() {
                         key={loc}
                         type="button"
                         onClick={() => setSelectedLocation(loc)}
-                        className={`px-4 py-2.5 border text-[10px] font-bold tracking-wider text-center transition-all duration-300 ${
-                          selectedLocation === loc
+                        className={`px-4 py-2.5 border text-[10px] font-bold tracking-wider text-center transition-all duration-300 ${selectedLocation === loc
                             ? 'border-minimal-black bg-minimal-black text-white'
                             : 'border-neutral-200 bg-white text-neutral-500 hover:border-neutral-400 hover:text-minimal-black'
-                        }`}
+                          }`}
                       >
                         {loc}
                       </button>
@@ -1331,7 +1326,7 @@ export default function App() {
                   INITIALIZE PRODUCTION
                   <Sparkles className="w-4 h-4 text-white animate-spin" style={{ animationDuration: '6s' }} />
                 </button>
-                
+
                 {formSubmitted && (
                   <div className="mt-4 text-xs tracking-widest text-minimal-black font-bold animate-pulse text-center">
                     PRODUCTION ENGINE RUNNING. WE WILL REACH OUT VIA NAVRASSAAEVENTS@GMAIL.COM OR CALL +91 9368158321.
@@ -1348,7 +1343,7 @@ export default function App() {
       {/* Testimonial Section */}
       <section className="relative py-24 sm:py-32 border-t border-neutral-100 bg-neutral-50/30 z-10">
         <div className="max-w-4xl mx-auto px-6 sm:px-10 text-center">
-          
+
           <span className="text-xs font-semibold tracking-[0.25em] text-neutral-400 uppercase mb-6 block">
             CLIENT EXPERIENCE
           </span>
@@ -1396,7 +1391,7 @@ export default function App() {
 
       {/* Leadership / Founders Section */}
       <section id="leadership" className="relative bg-minimal-black text-white z-10 border-t border-neutral-800">
-        
+
         {/* Header Section */}
         <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-24 sm:py-32 pb-16">
           <div className="max-w-2xl">
@@ -1415,16 +1410,16 @@ export default function App() {
 
         {/* Interactive Expandable Accordion */}
         <div className="w-full flex flex-col md:flex-row h-[800px] md:h-[600px] lg:h-[700px] border-t border-neutral-800">
-          
+
           {/* CEO */}
           <div className="group relative flex-1 md:hover:flex-[2.5] transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] overflow-hidden cursor-pointer border-b md:border-b-0 md:border-r border-neutral-800 bg-neutral-900">
-            <img 
-              src="/CEO.jpg" 
+            <img
+              src="/CEO.jpg"
               alt="Chief Executive Officer"
               className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all duration-700"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-100 md:opacity-80 group-hover:opacity-100 transition-opacity duration-700" />
-            
+
             {/* Always visible on mobile, reveals on desktop hover */}
             <div className="absolute bottom-0 left-0 w-full p-6 sm:p-8 lg:p-12 flex flex-col justify-end h-full pointer-events-none">
               <div className="transform md:translate-y-8 md:group-hover:translate-y-0 transition-transform duration-700 ease-out">
@@ -1448,13 +1443,13 @@ export default function App() {
 
           {/* MD */}
           <div className="group relative flex-1 md:hover:flex-[2.5] transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] overflow-hidden cursor-pointer border-b md:border-b-0 md:border-r border-neutral-800 bg-neutral-900">
-            <img 
-              src="/Managing_director.jpg" 
+            <img
+              src="/Managing_director.jpg"
               alt="Managing Director"
               className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all duration-700"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-100 md:opacity-80 group-hover:opacity-100 transition-opacity duration-700" />
-            
+
             <div className="absolute bottom-0 left-0 w-full p-6 sm:p-8 lg:p-12 flex flex-col justify-end h-full pointer-events-none">
               <div className="transform md:translate-y-8 md:group-hover:translate-y-0 transition-transform duration-700 ease-out">
                 <span className="text-[10px] font-bold tracking-[0.25em] text-amber-500 uppercase mb-2 block md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 delay-100">
@@ -1476,13 +1471,13 @@ export default function App() {
 
           {/* ED */}
           <div className="group relative flex-1 md:hover:flex-[2.5] transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] overflow-hidden cursor-pointer bg-neutral-900">
-            <img 
-              src="/Executive_Director.jpg" 
+            <img
+              src="/Executive_Director.jpg"
               alt="Executive Director"
               className="absolute inset-0 w-full h-full object-cover object-[center_top] opacity-80 group-hover:opacity-100 transition-all duration-700"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-100 md:opacity-80 group-hover:opacity-100 transition-opacity duration-700" />
-            
+
             <div className="absolute bottom-0 left-0 w-full p-6 sm:p-8 lg:p-12 flex flex-col justify-end h-full pointer-events-none">
               <div className="transform md:translate-y-8 md:group-hover:translate-y-0 transition-transform duration-700 ease-out">
                 <span className="text-[10px] font-bold tracking-[0.25em] text-amber-500 uppercase mb-2 block md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 delay-100">
@@ -1508,14 +1503,14 @@ export default function App() {
       {/* Footer */}
       <footer className="relative bg-white border-t border-neutral-200 pt-20 pb-10 z-10">
         <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
-          
+
           <div className="grid grid-cols-1 md:grid-cols-12 gap-12 pb-16 border-b border-neutral-100">
-            
+
             {/* Logo details */}
             <div className="md:col-span-6 lg:col-span-7 flex flex-col items-start pr-12">
-              <img 
-                src={logoImg} 
-                alt="Navrassaa Events Logo" 
+              <img
+                src={logoImg}
+                alt="Navrassaa Events Logo"
                 className="h-14 sm:h-16 w-auto object-contain mb-4"
               />
               <span className="text-[10px] text-neutral-400 tracking-widest uppercase font-bold mb-4">
@@ -1548,14 +1543,14 @@ export default function App() {
                 <Clock className="w-4 h-4 text-minimal-black" />
                 <span>24/7 Service</span>
               </div>
-              <a 
-                href="mailto:navrassaaevents@gmail.com" 
+              <a
+                href="mailto:navrassaaevents@gmail.com"
                 className="block text-xs text-neutral-600 hover:text-minimal-black transition-colors font-medium break-all"
               >
                 navrassaaevents@gmail.com
               </a>
-              <a 
-                href="tel:9368158321" 
+              <a
+                href="tel:9368158321"
                 className="block text-xs text-neutral-600 hover:text-minimal-black transition-colors font-semibold mt-1"
               >
                 +91 9368158321
@@ -1566,16 +1561,16 @@ export default function App() {
 
           {/* Socials / Copyright */}
           <div className="pt-10 flex flex-col sm:flex-row items-center justify-between gap-6">
-            
+
             <div className="text-[9px] tracking-widest text-neutral-400 uppercase text-center sm:text-left font-bold">
               <span>&copy; {new Date().getFullYear()} NAVRASSAA. ALL RIGHTS RESERVED. &bull; MINIMALIST PROFESSIONAL GATHERINGS.</span>
             </div>
 
             <div className="flex flex-wrap justify-center items-center gap-4 sm:gap-6 text-neutral-400 font-bold">
-              <a 
-                href="https://www.instagram.com/navrassaaevents?igsi=a29tZW5obThjYTBj&utm_source=qr" 
-                target="_blank" 
-                rel="noopener noreferrer" 
+              <a
+                href="https://www.instagram.com/navrassaaevents?igsi=a29tZW5obThjYTBj&utm_source=qr"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="hover:text-minimal-black transition-colors text-[10px] tracking-widest uppercase flex items-center gap-1"
               >
                 <InstagramIcon className="w-3.5 h-3.5" />
