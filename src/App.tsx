@@ -110,12 +110,6 @@ const typewriterWords = [
   { prefix: 'Delivering', highlight: 'VIP Hospitality' },
 ]
 
-const stats = [
-  { value: '450+', label: 'Events Curated' },
-  { value: '98%', label: 'Flawless Rating' },
-  { value: '15+', label: 'Global Destinations' },
-  { value: '100M+', label: 'Impressions Built' },
-]
 
 const stockImages = [
   "/showcase_1.jpg",
@@ -1302,21 +1296,6 @@ export default function App() {
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="relative py-16 bg-white border-b border-neutral-100 z-10">
-        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 grid grid-cols-2 lg:grid-cols-4 gap-12 text-center">
-          {stats.map((stat) => (
-            <div key={stat.label} className="flex flex-col items-center">
-              <span className="font-outfit text-4xl sm:text-5xl font-black text-minimal-black tracking-tight">
-                {stat.value}
-              </span>
-              <span className="text-[10px] tracking-widest text-neutral-400 uppercase mt-2.5 font-bold">
-                {stat.label}
-              </span>
-            </div>
-          ))}
-        </div>
-      </section>
 
       {/* Booking Form Design Portal */}
       <section id="book" className="relative py-24 sm:py-32 bg-white z-10">
