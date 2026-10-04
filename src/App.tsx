@@ -18,7 +18,6 @@ import {
   Sparkles,
   Utensils,
   X,
-  MessageSquare,
   Check
 } from 'lucide-react'
 
