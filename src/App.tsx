@@ -659,6 +659,7 @@ export default function App() {
   const [selectedLocation, setSelectedLocation] = useState<string>('Luxury Estate')
   const [guestCount, setGuestCount] = useState<number>(250)
   const [formSubmitted, setFormSubmitted] = useState<boolean>(false)
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
   const [activeVideoModal, setActiveVideoModal] = useState<string | null>(null)
   const [selectedBlogPost, setSelectedBlogPost] = useState<BlogPost | null>(null)
 
@@ -772,12 +773,45 @@ export default function App() {
   const iconCenterIndex = Math.floor(eventIcons.length / 2)
 
   // Handle booking form submission
-  const handleBookingSubmit = (e: React.FormEvent) => {
+  const handleBookingSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    setFormSubmitted(true)
-    setTimeout(() => {
-      setFormSubmitted(false)
-    }, 5000)
+
+    if (isSubmitting) return;
+    setIsSubmitting(true);
+
+    // Gather form data
+    const formData = new FormData(e.currentTarget);
+
+    // TODO: Get your free access key from https://web3forms.com/ and paste it below
+    formData.append("access_key", "ee632b59-f027-4701-8f38-8c529980fc16");
+
+    // Append the custom state values that aren't native inputs
+    formData.append("Event Stream", selectedService);
+    formData.append("Preferred Setting", selectedLocation);
+    formData.append("Guest Capacity", guestCount.toString() + " guests");
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setFormSubmitted(true);
+        e.currentTarget.reset(); // Clear text inputs after success
+        setTimeout(() => {
+          setFormSubmitted(false)
+        }, 5000)
+      } else {
+        alert("Failed to submit form. Please check your access key.");
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   const heroOpacity = Math.max(1 - scrollY / 650, 0)
@@ -1318,8 +1352,8 @@ export default function App() {
                       type="button"
                       onClick={() => setSelectedService(serv.title)}
                       className={`px-4 py-2.5 border text-[11px] font-bold tracking-wider text-center transition-all duration-300 ${selectedService === serv.title
-                          ? 'border-minimal-black bg-minimal-black text-white'
-                          : 'border-neutral-200 bg-white text-neutral-500 hover:border-neutral-400 hover:text-minimal-black'
+                        ? 'border-minimal-black bg-minimal-black text-white'
+                        : 'border-neutral-200 bg-white text-neutral-500 hover:border-neutral-400 hover:text-minimal-black'
                         }`}
                     >
                       {serv.title}
@@ -1343,8 +1377,8 @@ export default function App() {
                         type="button"
                         onClick={() => setSelectedLocation(loc)}
                         className={`px-4 py-2.5 border text-[10px] font-bold tracking-wider text-center transition-all duration-300 ${selectedLocation === loc
-                            ? 'border-minimal-black bg-minimal-black text-white'
-                            : 'border-neutral-200 bg-white text-neutral-500 hover:border-neutral-400 hover:text-minimal-black'
+                          ? 'border-minimal-black bg-minimal-black text-white'
+                          : 'border-neutral-200 bg-white text-neutral-500 hover:border-neutral-400 hover:text-minimal-black'
                           }`}
                       >
                         {loc}
@@ -1384,13 +1418,14 @@ export default function App() {
               </div>
 
               {/* Text Fields */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
                 <div>
                   <label className="block text-[10px] font-bold tracking-widest text-neutral-400 uppercase mb-1.5">
                     Your Name
                   </label>
                   <input
                     type="text"
+                    name="name"
                     required
                     placeholder="E.g. Lord Sterling"
                     className="w-full py-2 bg-transparent text-minimal-black text-sm border-b border-neutral-200 focus:border-minimal-black focus:outline-none transition-colors duration-300"
@@ -1402,8 +1437,26 @@ export default function App() {
                   </label>
                   <input
                     type="email"
+                    name="email"
                     required
                     placeholder="E.g. sterling@estate.com"
+                    className="w-full py-2 bg-transparent text-minimal-black text-sm border-b border-neutral-200 focus:border-minimal-black focus:outline-none transition-colors duration-300"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[10px] font-bold tracking-widest text-neutral-400 uppercase mb-1.5">
+                    Your Phone
+                  </label>
+                  <input
+                    type="tel"
+                    name="phone"
+                    required
+                    pattern="[0-9]*"
+                    inputMode="numeric"
+                    onInput={(e) => {
+                      e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, '')
+                    }}
+                    placeholder="E.g. 9876543210"
                     className="w-full py-2 bg-transparent text-minimal-black text-sm border-b border-neutral-200 focus:border-minimal-black focus:outline-none transition-colors duration-300"
                   />
                 </div>
@@ -1415,6 +1468,7 @@ export default function App() {
                   Vision Blueprint / Special Aesthetic Requests
                 </label>
                 <textarea
+                  name="vision_notes"
                   rows={3}
                   placeholder="E.g., high-contrast layout, white lighting coordinates, symmetrical setups..."
                   className="w-full py-2 bg-transparent text-minimal-black text-sm border-b border-neutral-200 focus:border-minimal-black focus:outline-none transition-colors duration-300 resize-none"
@@ -1425,10 +1479,11 @@ export default function App() {
               <div className="flex flex-col items-center pt-4">
                 <button
                   type="submit"
-                  className="w-full sm:w-auto px-10 py-4 bg-minimal-black text-white hover:bg-neutral-800 font-outfit text-xs font-black tracking-widest uppercase transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer"
+                  disabled={isSubmitting}
+                  className={`w-full sm:w-auto px-10 py-4 font-outfit text-xs font-black tracking-widest uppercase transition-all duration-300 flex items-center justify-center gap-2 ${isSubmitting ? 'bg-neutral-400 text-neutral-200 cursor-not-allowed' : 'bg-minimal-black text-white hover:bg-neutral-800 cursor-pointer'}`}
                 >
-                  INITIALIZE PRODUCTION
-                  <Sparkles className="w-4 h-4 text-white animate-spin" style={{ animationDuration: '6s' }} />
+                  {isSubmitting ? 'INITIALIZING...' : 'INITIALIZE PRODUCTION'}
+                  <Sparkles className={`w-4 h-4 text-white ${isSubmitting ? 'animate-pulse' : 'animate-spin'}`} style={{ animationDuration: '6s' }} />
                 </button>
 
                 {formSubmitted && (
