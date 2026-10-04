@@ -1499,31 +1499,6 @@ export default function App() {
         </div>
       </section>
 
-      {/* Testimonial Section */}
-      <section className="relative py-24 sm:py-32 border-t border-neutral-100 bg-neutral-50/30 z-10">
-        <div className="max-w-4xl mx-auto px-6 sm:px-10 text-center">
-
-          <span className="text-xs font-semibold tracking-[0.25em] text-neutral-400 uppercase mb-6 block">
-            CLIENT EXPERIENCE
-          </span>
-
-          <div className="relative py-4">
-            <MessageSquare className="w-10 h-10 text-neutral-300 mx-auto mb-6" />
-            <p className="font-outfit text-xl sm:text-2xl italic leading-relaxed text-minimal-black max-w-3xl mx-auto mb-8">
-              "Navrassaa Events engineered a wedding union that felt like a museum exhibition. Symmetrical floral grids, clean audio paths, and flawless catering scheduling. Exceptional restraint."
-            </p>
-            <div className="flex flex-col items-center">
-              <span className="font-outfit font-extrabold text-[11px] tracking-widest uppercase text-minimal-black">
-                HELENA &amp; AURELIUS BRANSON
-              </span>
-              <span className="text-[9px] tracking-widest text-neutral-400 uppercase mt-0.5">
-                Lake Como, Wedding 2025
-              </span>
-            </div>
-          </div>
-
-        </div>
-      </section>
 
       {/* Video Lightbox Modal */}
       {activeVideoModal && (
@@ -1735,9 +1710,6 @@ export default function App() {
                 <InstagramIcon className="w-3.5 h-3.5" />
                 INSTAGRAM
               </a>
-              <a href="#" className="hover:text-minimal-black transition-colors text-[10px] tracking-widest uppercase">PINTEREST</a>
-              <a href="#" className="hover:text-minimal-black transition-colors text-[10px] tracking-widest uppercase">VIMEO</a>
-              <a href="#" className="hover:text-minimal-black transition-colors text-[10px] tracking-widest uppercase">LINKEDIN</a>
             </div>
 
           </div>
